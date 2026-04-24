@@ -743,6 +743,29 @@
   [data-label="A8 Competitive"] table.apx-table thead th { font-size: 17px; }
   [data-label="A8 Competitive"] .apx-sub { margin-bottom: 28px; }
 
+  /* A14 / A15 overflow fix — 3–4 safety-layer blocks are denser than A3's */
+  [data-label="A14 Architecture"] .apx-sub,
+  [data-label="A15 Safety Impl"] .apx-sub { margin-bottom: 28px; }
+  [data-label="A14 Architecture"] .safety-layers,
+  [data-label="A15 Safety Impl"] .safety-layers { gap: 10px; }
+  [data-label="A14 Architecture"] .safety-layer,
+  [data-label="A15 Safety Impl"] .safety-layer { padding: 16px 22px; }
+  [data-label="A14 Architecture"] .safety-layer h4,
+  [data-label="A15 Safety Impl"] .safety-layer h4 { font-size: 24px; margin-bottom: 4px; }
+  [data-label="A14 Architecture"] .safety-layer p,
+  [data-label="A15 Safety Impl"] .safety-layer p { font-size: 21px; line-height: 1.4; }
+  [data-label="A14 Architecture"] .safety-layer .n,
+  [data-label="A15 Safety Impl"] .safety-layer .n { width: 44px; height: 44px; font-size: 22px; }
+  [data-label="A15 Safety Impl"] .callout { font-size: 22px; padding: 18px 24px; margin-top: 18px; }
+
+  /* A13 / A16 — tighten card padding and bullet line-height just a notch */
+  [data-label="A13 Tech Stack"] .apx-card,
+  [data-label="A16 Proof of Build"] .apx-card { padding: 28px 30px; }
+  [data-label="A13 Tech Stack"] .apx-card ul,
+  [data-label="A16 Proof of Build"] .apx-card ul { font-size: 22px; line-height: 1.5; }
+  [data-label="A13 Tech Stack"] .apx-card h4,
+  [data-label="A16 Proof of Build"] .apx-card h4 { font-size: 26px; margin-bottom: 10px; }
+
   /* Safety 5 layers */
   .safety-layers { display: flex; flex-direction: column; gap: 14px; }
   .safety-layer {
@@ -901,7 +924,7 @@
 <section class="title-slide" data-label="01 Title">
   <div class="title-badge">AMD Slingshot · Regional Demo Day 2026</div>
   <div class="jovara-mark">Jovara<span class="dot">.</span></div>
-  <div class="title-tag">A voice-first AI agronomist for Indian farmers, <em>built on government rails.</em></div>
+  <div class="title-tag">A pocket AI agronomist for Indian farmers, <em>built on government rails.</em></div>
   <div class="title-meta">
     <div>
       <div class="k">Founders</div>
