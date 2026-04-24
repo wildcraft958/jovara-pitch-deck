@@ -743,20 +743,24 @@
   [data-label="A8 Competitive"] table.apx-table thead th { font-size: 17px; }
   [data-label="A8 Competitive"] .apx-sub { margin-bottom: 28px; }
 
-  /* A14 / A15 overflow fix — 3–4 safety-layer blocks are denser than A3's */
-  [data-label="A14 Architecture"] .apx-sub,
-  [data-label="A15 Safety Impl"] .apx-sub { margin-bottom: 28px; }
-  [data-label="A14 Architecture"] .safety-layers,
-  [data-label="A15 Safety Impl"] .safety-layers { gap: 10px; }
-  [data-label="A14 Architecture"] .safety-layer,
-  [data-label="A15 Safety Impl"] .safety-layer { padding: 16px 22px; }
-  [data-label="A14 Architecture"] .safety-layer h4,
-  [data-label="A15 Safety Impl"] .safety-layer h4 { font-size: 24px; margin-bottom: 4px; }
-  [data-label="A14 Architecture"] .safety-layer p,
-  [data-label="A15 Safety Impl"] .safety-layer p { font-size: 21px; line-height: 1.4; }
-  [data-label="A14 Architecture"] .safety-layer .n,
-  [data-label="A15 Safety Impl"] .safety-layer .n { width: 44px; height: 44px; font-size: 22px; }
-  [data-label="A15 Safety Impl"] .callout { font-size: 22px; padding: 18px 24px; margin-top: 18px; }
+  /* A14 / A15 overflow fix — 3–4 safety-layer blocks denser than A3's */
+  .apx[data-label="A14 Architecture"],
+  .apx[data-label="A15 Safety Impl"] { padding-top: 120px; }
+  .apx[data-label="A14 Architecture"] h2,
+  .apx[data-label="A15 Safety Impl"] h2 { font-size: 40px; margin-bottom: 10px; }
+  .apx[data-label="A14 Architecture"] .apx-sub,
+  .apx[data-label="A15 Safety Impl"] .apx-sub { font-size: 24px; margin-bottom: 22px; }
+  .apx[data-label="A14 Architecture"] .safety-layers,
+  .apx[data-label="A15 Safety Impl"] .safety-layers { gap: 8px; }
+  .apx[data-label="A14 Architecture"] .safety-layer,
+  .apx[data-label="A15 Safety Impl"] .safety-layer { padding: 14px 20px; grid-template-columns: 52px 1fr; gap: 18px; }
+  .apx[data-label="A14 Architecture"] .safety-layer h4,
+  .apx[data-label="A15 Safety Impl"] .safety-layer h4 { font-size: 22px; margin-bottom: 4px; }
+  .apx[data-label="A14 Architecture"] .safety-layer p,
+  .apx[data-label="A15 Safety Impl"] .safety-layer p { font-size: 19px; line-height: 1.38; }
+  .apx[data-label="A14 Architecture"] .safety-layer .n,
+  .apx[data-label="A15 Safety Impl"] .safety-layer .n { width: 40px; height: 40px; font-size: 20px; }
+  .apx[data-label="A15 Safety Impl"] .callout { font-size: 19px; padding: 14px 20px; margin-top: 14px; line-height: 1.4; }
 
   /* A13 / A16 — tighten card padding and bullet line-height just a notch */
   [data-label="A13 Tech Stack"] .apx-card,
@@ -1799,19 +1803,19 @@
   <div class="safety-layers">
     <div class="safety-layer">
       <div class="n">1</div>
-      <div><h4>Intent classifier (max_tokens = 8)</h4><p>Lightweight OpenAI-compatible model classifies each query into one of 11 intents: weather, irrigation, pest_disease, crop_protection, diagnosis, market, fertilizer, sowing, scheme, greeting, general. Sees the last 5 turns of conversation history.</p></div>
+      <div><h4>Intent classifier (max_tokens = 8)</h4><p>Lightweight OpenAI-compatible model routes each query into one of 11 intents (weather, pest_disease, market, scheme, etc.). Sees the last 5 conversation turns.</p></div>
     </div>
     <div class="safety-layer">
       <div class="n">2</div>
-      <div><h4>Per-intent system prompt + tool binding</h4><p>Gemini 2.5 receives an intent-specific system prompt and only the tools relevant to that intent via <code>bind_tools</code>. 16 tools total; typically 2–5 bound per turn. Eliminates cross-contamination and cuts token cost vs. binding everything on every call.</p></div>
+      <div><h4>Per-intent system prompt + tool binding</h4><p>Gemini 2.5 gets an intent-specific system prompt and only the relevant tools via <code>bind_tools</code> — typically 2–5 of 16 per turn. Eliminates cross-contamination; cuts token cost.</p></div>
     </div>
     <div class="safety-layer">
       <div class="n">3</div>
-      <div><h4>Mandatory-tool enforcement + retry loop</h4><p><code>cibrc_safety_check</code> and <code>imd_weather_check</code> declared mandatory in config.yaml. Post-loop inspection scans the message history; if a required tool wasn't called, the agent is re-prompted up to 2 times before the answer is accepted.</p></div>
+      <div><h4>Mandatory-tool enforcement + retry loop</h4><p><code>cibrc_safety_check</code> and <code>imd_weather_check</code> marked mandatory in config.yaml. Post-loop inspection re-prompts the agent up to 2 times if a required tool wasn't called.</p></div>
     </div>
     <div class="safety-layer">
       <div class="n">4</div>
-      <div><h4>RAG pipeline + geo resolution</h4><p>LLM-driven Hinglish keyword extractor ("gehu" → wheat, "dhan" → rice) pulls ICAR ChromaDB + KCC transcript collections. Geo resolver turns (state, district) into the nearest IMD agromet station + Agmark mandi with district-neighbour fallback — making every downstream tool call location-aware.</p></div>
+      <div><h4>RAG pipeline + geo resolution</h4><p>Hinglish keyword extractor ("gehu" → wheat) pulls ICAR ChromaDB + KCC transcripts. Geo resolver maps (state, district) to nearest IMD station + Agmark mandi, with district-neighbour fallback.</p></div>
     </div>
   </div>
   <div class="foot-brand">Jovara · Appendix</div>
@@ -1826,18 +1830,18 @@
   <div class="safety-layers">
     <div class="safety-layer">
       <div class="n">1</div>
-      <div><h4>Prompt guardrails</h4><p>Intent-specific system prompts instruct the agent never to recommend unregistered or banned chemicals, and to cite sources. First line of defense — necessary but, on its own, not reliable.</p></div>
+      <div><h4>Prompt guardrails</h4><p>Intent-specific system prompts instruct the agent to never recommend banned chemicals and to cite sources. Necessary — but, alone, unreliable.</p></div>
     </div>
     <div class="safety-layer">
       <div class="n">2</div>
-      <div><h4>Forced <code>cibrc_safety_check</code> tool call</h4><p>Declared mandatory in config.yaml. Post-loop inspection verifies the tool was called on every chemical-adjacent query. If skipped, the agent is re-prompted up to 2 times before any answer is accepted — the tool call is not optional.</p></div>
+      <div><h4>Forced <code>cibrc_safety_check</code> tool call</h4><p>Declared mandatory in config.yaml. Post-loop inspection verifies the call on every chemical-adjacent query; if skipped, the agent is re-prompted up to 2 times before any answer is accepted.</p></div>
     </div>
     <div class="safety-layer">
       <div class="n">3</div>
-      <div><h4>Post-hoc regex <code>SafetyValidator</code> + hard block</h4><p>Precomputed banned-chemical set from the CIBRC CSV. Regex scan runs on the LLM's final answer. If a match fires in strict mode, the answer is sent back to the LLM with an explicit revision instruction; if the revision still contains banned substances, the response is replaced with a hard block.</p></div>
+      <div><h4>Post-hoc regex <code>SafetyValidator</code> + hard block</h4><p>Regex scan of the final answer against the precomputed banned-chemical set. A match triggers a revision round-trip; if the revision still contains banned substances, the response is hard-blocked.</p></div>
     </div>
   </div>
-  <div class="callout"><em>Why three layers?</em> A single prompt warning proved unreliable in testing. Each layer is independently observable, independently toggleable in config.yaml, and independently tested in the 426-test suite.</div>
+  <div class="callout"><em>Why three layers?</em> A single prompt warning proved unreliable. Each layer is independently toggleable in config.yaml and independently tested in the 426-test suite.</div>
   <div class="foot-brand">Jovara · Appendix</div>
 </section>
 
