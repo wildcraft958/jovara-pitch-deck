@@ -10,7 +10,7 @@
 [
   "I'm Devansh. With my co-founders Animesh and Prem, I'm building Jovara at IIT Kharagpur. We're solving a problem India has been trying to solve for twenty years — how a marginal farmer gets trustworthy, timely advice. In the next seven minutes I'll show you why the current answers don't work, what we're building, and why now is the moment.",
   "This number is the pitch. The Kisan Call Centre — the government's flagship farmer-advisory service — collapsed by 40% in two years. Not because service got worse. Unanswered rates stayed under 5%. Farmers stopped calling because the cost of the call exceeds the value of what they get back. The government has publicly committed to replacing this stack. We're building what should replace it.",
-  "Ruma is a real persona we've built. She's in Murshidabad — three hours from our campus. She can't read a paragraph comfortably. Her land is 0.4 hectares. If she makes one wrong decision — a spray, a sowing date, a sale — she loses the season. India has 86 million farmers like her. The extension system was supposed to help, but there's one officer for every 1,162 farmers, and only 6.8% of farmers report ever seeing one. This is a coverage problem, not a training problem. No state can hire its way out.",
+  "Shubhendu Das is a real farmer we've met. He's in Murshidabad — three hours from our campus. He can't read a paragraph comfortably. His land is 0.4 hectares. If he makes one wrong decision — a spray, a sowing date, a sale — he loses the season. India has 86 million farmers like him. The extension system was supposed to help, but there's one officer for every 1,162 farmers, and only 6.8% of farmers report ever seeing one. This is a coverage problem, not a training problem. No state can hire its way out.",
   "This is the whole competitive landscape for Indian agri-AI advisory in one slide. Every full-featured product that farmers use today is reactive — the farmer has to ask. Every proactive product is narrow — one pest, one event, one crop. The top-right quadrant — proactive and full-featured — is genuinely empty. That's where we are.",
   "Three bets. First: proactive beats reactive, because the data proves farmers stopped responding to reactive channels. Second: multi-layer grounding — we're the only advisory in India that literally cannot recommend an off-label pesticide, because the system checks the government register before it speaks. Third: voice-first — because 40% of farmers are low-literacy or on feature phones, and no smartphone-text product reaches them.",
   "The stack. Bottom to top — our Spike sensor gives us ground truth no satellite can reach at sub-half-hectare resolution. Above that, we integrate with AgriStack, the national farmer-ID layer, plus Krishi-DSS satellite feeds and the soil-health-card database. The AI layer uses Sarvam — India's frontier Indic-language AI — for voice across 10+ Indian languages, and an LLM for reasoning. The grounding layer is where our differentiator lives: every spray recommendation is gated through the government pesticide registry and ICAR's official crop guidance. Low-confidence cases go to a human reviewer — a KVK agronomist — before the answer is sent. The orchestration layer is the proactive event engine that watches weather, pest, and scheme triggers and pushes alerts. The farmer hears it all as a voice message in her language.",
@@ -298,9 +298,9 @@
   }
   .persona-image {
     position: absolute; inset: 0;
-    background-image: url('assets/ruma-portrait.svg');
+    background-image: url('assets/shubhendu.jpeg');
     background-size: cover;
-    background-position: center 30%;
+    background-position: 30% 15%;
   }
   .persona-image::after {
     content: "";
@@ -959,7 +959,7 @@
     <div class="persona-image"></div>
     <div class="persona-caption">
       <div class="persona-kicker">Persona · Murshidabad, WB</div>
-      <div class="persona-name-new">Ruma Das, 38</div>
+      <div class="persona-name-new">Shubhendu Das</div>
       <div class="persona-meta-new">Marginal paddy farmer · 0.4 hectares</div>
       <div class="persona-quote-new">“I don’t type. If I have to type, I will just call my cousin.”</div>
     </div>
@@ -967,7 +967,7 @@
   </div>
   <div class="persona-analysis">
     <div class="pa-top">
-      <div class="pa-eyebrow">Farmers like Ruma, by the numbers</div>
+      <div class="pa-eyebrow">Farmers like Shubhendu, by the numbers</div>
       <div class="pa-hero">
         <div class="pa-num">86<em>m</em></div>
         <div class="pa-headline">A coverage gap <em>no state can hire out of.</em></div>
