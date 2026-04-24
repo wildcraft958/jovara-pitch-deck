@@ -725,6 +725,13 @@
   table.apx-table tr.jovara-row td { color: var(--canvas); font-weight: 500; }
   table.apx-table tr.jovara-row td strong { color: var(--turmeric); }
 
+  /* A8 — 10-row table needs tighter sizing to clear the footer */
+  [data-label="A8 Competitive"] table.apx-table { font-size: 20px; }
+  [data-label="A8 Competitive"] table.apx-table th,
+  [data-label="A8 Competitive"] table.apx-table td { padding: 10px 14px; }
+  [data-label="A8 Competitive"] table.apx-table thead th { font-size: 17px; }
+  [data-label="A8 Competitive"] .apx-sub { margin-bottom: 28px; }
+
   /* Safety 5 layers */
   .safety-layers { display: flex; flex-direction: column; gap: 14px; }
   .safety-layer {

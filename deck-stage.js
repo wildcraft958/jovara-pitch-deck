@@ -123,12 +123,7 @@
     }
 
     .overlay {
-      position: fixed;
-      left: 50%;
-      bottom: 22px;
-      transform: translate(-50%, 6px) scale(0.92);
-      filter: blur(6px);
-      display: flex;
+      display: none !important;
       align-items: center;
       gap: 4px;
       padding: 4px;
