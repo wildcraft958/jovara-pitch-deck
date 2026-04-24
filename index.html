@@ -28,7 +28,11 @@
   "This is the anti-pattern we design against. Plantix started as a free pest-ID tool and ended up an advertising channel for pesticide retailers. A German agrochemical distributor bought them in 2023. Indian state governments know this story, and they're wary of any advisory with retailer-commission revenue. Our B2G-only model is a structural defence — we literally cannot be paid to recommend a specific product.",
   "Compliance architecture is not a secondary concern for us; it's primary. DPDP Rules came into force last November. Any AgriStack integration requires consent-manager compliance on day one. We've designed for this from the start — three-tap data export, secure Aadhaar vault, full audit log. For a B2G company selling to state Law Departments, this compliance architecture is the first thing a Secretary's office will verify. It's a feature, not overhead.",
   "This is the demo we'll walk through live if there's time. Three frames — the farmer asks, the system refuses the unregistered option, the system offers the registered alternative with a clear source. The refusal isn't a failure state; it's the product's trust moment. This is what we'll have running end-to-end by Demo Day.",
-  "If anyone wants to follow up on specific numbers, here are the sources. We can share the full research memo — it's roughly 80 pages — after the event."
+  "If anyone wants to follow up on specific numbers, here are the sources. We can share the full research memo — it's roughly 80 pages — after the event.",
+  "The full stack. Backend is FastAPI on Python 3.11 with LangChain for the agent loop and Gemini 2.5 Flash and Pro on Vertex AI for the LLM. Sarvam handles ASR and TTS across four Indian languages. ChromaDB is the vector store for RAG over ICAR PDFs and 221,000 KCC transcripts. Firebase gives us Firestore for persistence, Cloud Storage for images, and FCM for push alerts. The mobile side is React Native with Expo SDK 54 in TypeScript. Redux Toolkit and RTK Query give us an offline-first typed API surface. The app is fully internationalised in English, Hindi, and Bengali.",
+  "The key architectural decision we're most often asked about is why we didn't just bind all the tools to every turn. The answer is cross-contamination. When the market tool is bound on a weather question, Gemini sometimes calls it anyway, which wastes tokens and occasionally produces nonsense. A cheap eight-token classifier that routes to one of eleven intents costs essentially nothing and lets us bind only two to five tools per turn instead of all sixteen. The mandatory-tool enforcement loop is the other decision people ask about — even with explicit prompt instructions, Gemini sometimes answers without calling the safety tool. Post-loop inspection with two retries fixed that.",
+  "The safety question. Every jury member in agri-AI has the same concern: what stops the model from recommending a banned pesticide. The answer is three independently failing layers. First: the cibrc_safety_check tool is mandatory and enforced by post-loop inspection with retry. Second: a regex scan of the final text against the precomputed banned-chemical set before it leaves the server. Third: if the regex scan fires and the revision loop still fails, the answer is hard-blocked. The farmer sees a refusal, not a dangerous recommendation. All three layers are separately tested.",
+  "We have working code. 11,200 lines of Python, 426 passing tests, 15 FastAPI endpoints, and a React Native app with 10 screens and three-language i18n. The GCP project is provisioned — Vertex AI, Firestore, Cloud Storage, Document AI, and FCM are all live. The corpus is wired in: 448 CIBRC chemicals, 221,000 KCC records ingestable into ChromaDB, 5,294 location rows, 4,062 mandis, 713 IMD stations. The hardware prototype is in progress. The tool that consumes the sensor data is already live in the backend, waiting for the node to ship."
 ]
 </script>
 <style>
@@ -1414,7 +1418,7 @@
 <!-- A1 — Kharif 2025 -->
 <section class="apx" data-label="A1 Kharif 2025">
   <div class="sec-label">Appendix — Kharif 2025</div>
-  <div class="slide-num">A1 / 12</div>
+  <div class="slide-num">A1 / 16</div>
   <h2>3.88 crore farmers. 13 states. SMS-triggered proactive advisory.</h2>
   <div class="apx-sub">Who built it?</div>
   <div class="apx-2">
@@ -1440,7 +1444,7 @@
 <!-- A2 — BharatGen partnership -->
 <section class="apx" data-label="A2 BharatGen">
   <div class="sec-label">Appendix — BharatGen posture</div>
-  <div class="slide-num">A2 / 12</div>
+  <div class="slide-num">A2 / 16</div>
   <h2>Partnership, not competition.</h2>
   <div class="apx-sub">BharatGen is the foundation. Jovara builds on top.</div>
   <div class="apx-2">
@@ -1461,7 +1465,7 @@
 <!-- A3 — Safety architecture -->
 <section class="apx" data-label="A3 Safety">
   <div class="sec-label">Appendix — Safety architecture</div>
-  <div class="slide-num">A3 / 12</div>
+  <div class="slide-num">A3 / 16</div>
   <h2>Five layers that make proactive advisory safe to ship.</h2>
   <div class="apx-sub">No Indian AI advisory composes all five. We're first.</div>
   <div class="safety-layers">
@@ -1492,7 +1496,7 @@
 <!-- A4 — Spike -->
 <section class="apx" data-label="A4 Spike">
   <div class="sec-label">Appendix — Spike sensor</div>
-  <div class="slide-num">A4 / 12</div>
+  <div class="slide-num">A4 / 16</div>
   <h2>The sensor that closes the ground-truth gap.</h2>
   <div class="apx-sub">Below satellite and weather-station resolution floors, at sub-₹1,000 BOM.</div>
   <div class="apx-2">
@@ -1523,7 +1527,7 @@
 <!-- A5 — Unit economics -->
 <section class="apx" data-label="A5 Unit economics">
   <div class="sec-label">Appendix — Unit economics</div>
-  <div class="slide-num">A5 / 12</div>
+  <div class="slide-num">A5 / 16</div>
   <h2>Who pays the ₹52 crore a year in outbound distribution?</h2>
   <div class="apx-sub">1 crore farmers × 2 nudges/week × ₹0.50 average ≈ ₹52 cr/year</div>
 
@@ -1544,7 +1548,7 @@
 <!-- A6 — Funding cascade -->
 <section class="apx" data-label="A6 30-month plan">
   <div class="sec-label">Appendix — Funding cascade</div>
-  <div class="slide-num">A6 / 12</div>
+  <div class="slide-num">A6 / 16</div>
   <h2>A 12-month runway optimised for B2B SaaS breaks at month 13.</h2>
   <div class="apx-sub">We plan for 30.</div>
 
@@ -1569,7 +1573,7 @@
 <!-- A7 — Why West Bengal -->
 <section class="apx" data-label="A7 West Bengal">
   <div class="sec-label">Appendix — Why West Bengal</div>
-  <div class="slide-num">A7 / 12</div>
+  <div class="slide-num">A7 / 16</div>
   <h2>Network, not map.</h2>
   <div class="apx-sub">Pilot-state choice is a founder-network decision. Ours happens to be coherent with the market thesis.</div>
   <div class="apx-2">
@@ -1598,7 +1602,7 @@
 <!-- A8 — Competitive table -->
 <section class="apx" data-label="A8 Competitive">
   <div class="sec-label">Appendix — The full landscape</div>
-  <div class="slide-num">A8 / 12</div>
+  <div class="slide-num">A8 / 16</div>
   <h2>Who's doing what with government.</h2>
   <div class="apx-sub">Of ten players, only three have deep government relationships. None ships full-featured proactive.</div>
   <table class="apx-table">
@@ -1624,7 +1628,7 @@
 <!-- A9 — Plantix anti-pattern -->
 <section class="apx" data-label="A9 Anti-pattern">
   <div class="sec-label">Appendix — The anti-pattern</div>
-  <div class="slide-num">A9 / 12</div>
+  <div class="slide-num">A9 / 16</div>
   <h2>Advisory that makes money from pesticide commissions drifts.</h2>
   <div class="apx-sub">State governments know this failure mode. It's why the B2G channel is open to a product that structurally cannot monetise through input commissions.</div>
   <div class="alert-card">
@@ -1644,7 +1648,7 @@
 <!-- A10 — Compliance -->
 <section class="apx" data-label="A10 Compliance">
   <div class="sec-label">Appendix — Regulatory / DPDP</div>
-  <div class="slide-num">A10 / 12</div>
+  <div class="slide-num">A10 / 16</div>
   <h2>Day-1 compliance, not a year-2 retrofit.</h2>
   <div class="apx-sub">For a B2G company, compliance is marketing. The state's Law Department is the gate we have to clear.</div>
   <div class="apx-2">
@@ -1671,7 +1675,7 @@
 <!-- A11 — Demo -->
 <section class="apx" data-label="A11 Demo">
   <div class="sec-label">Appendix — The demo</div>
-  <div class="slide-num">A11 / 12</div>
+  <div class="slide-num">A11 / 16</div>
   <h2>What the product actually does.</h2>
   <div class="apx-sub">Three frames. The refusal is the trust moment.</div>
   <div class="demo-steps">
@@ -1706,7 +1710,7 @@
 <!-- A12 — Sources -->
 <section class="apx" data-label="A12 Sources">
   <div class="sec-label">Appendix — Sources</div>
-  <div class="slide-num">A12 / 12</div>
+  <div class="slide-num">A12 / 16</div>
   <h2>The numbers, where they come from.</h2>
   <div class="apx-sub">Every figure in this deck is traceable.</div>
   <div class="sources">
@@ -1724,6 +1728,124 @@
     <div class="src-item"><b>Peer-reviewed analysis</b> — Godara et al., <i>Engineering Applications of AI</i> 117:105555, 2023</div>
   </div>
   <div class="sources-foot">Full research memo available on request.</div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A13 — Tech Stack -->
+<section class="apx" data-label="A13 Tech Stack">
+  <div class="sec-label">Appendix — Technical stack</div>
+  <div class="slide-num">A13 / 16</div>
+  <h2>FastAPI · LangChain · Gemini · Sarvam. Built for India's infra.</h2>
+  <div class="apx-sub">~11.2k LOC Python backend. React Native mobile. GCP infra. 33+ commits since March 2025.</div>
+  <div class="apx-2">
+    <div class="apx-card">
+      <h4>Backend (Python 3.11)</h4>
+      <ul>
+        <li><b>FastAPI + Uvicorn</b> — 15 endpoints, Pydantic v2 config-as-code</li>
+        <li><b>LangChain 0.3</b> — agentic tool-calling via <code>bind_tools</code></li>
+        <li><b>Gemini 2.5 Flash / Pro</b> on Vertex AI — chat + vision</li>
+        <li><b>ChromaDB</b> — RAG over ICAR PDFs + 221k KCC transcripts</li>
+        <li><b>Sarvam AI</b> — ASR + TTS in Hindi, Bengali, Odia, English</li>
+        <li><b>Firebase Admin SDK</b> — Firestore, Cloud Storage, FCM push alerts</li>
+        <li><b>Google Document AI</b> — OCR over scanned government PDFs</li>
+      </ul>
+    </div>
+    <div class="apx-card">
+      <h4>Mobile (React Native + Expo)</h4>
+      <ul>
+        <li><b>Expo SDK 54</b>, React Native 0.81, TypeScript (~3.3k LOC, 47 files)</li>
+        <li><b>Redux Toolkit + RTK Query</b> — typed API surface, offline-first persist</li>
+        <li><b>NativeWind</b> — Tailwind styling</li>
+        <li><b>react-i18next</b> — English / Hindi / Bengali</li>
+        <li><b>expo-camera</b> — leaf photo diagnosis + Soil Health Card OCR upload</li>
+        <li><b>expo-barcode-scanner</b> — field sensor node pairing</li>
+        <li>10 screens · 6 Redux slices · 3-language i18n</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A14 — Agentic Architecture -->
+<section class="apx" data-label="A14 Architecture">
+  <div class="sec-label">Appendix — Agentic architecture</div>
+  <div class="slide-num">A14 / 16</div>
+  <h2>One cheap classifier. 11 intents. Only the right tools bound per turn.</h2>
+  <div class="apx-sub">Tool-call bloat and cross-contamination solved without fine-tuning.</div>
+  <div class="safety-layers">
+    <div class="safety-layer">
+      <div class="n">1</div>
+      <div><h4>Intent classifier (max_tokens = 8)</h4><p>Lightweight OpenAI-compatible model classifies each query into one of 11 intents: weather, irrigation, pest_disease, crop_protection, diagnosis, market, fertilizer, sowing, scheme, greeting, general. Sees the last 5 turns of conversation history.</p></div>
+    </div>
+    <div class="safety-layer">
+      <div class="n">2</div>
+      <div><h4>Per-intent system prompt + tool binding</h4><p>Gemini 2.5 receives an intent-specific system prompt and only the tools relevant to that intent via <code>bind_tools</code>. 16 tools total; typically 2–5 bound per turn. Eliminates cross-contamination and cuts token cost vs. binding everything on every call.</p></div>
+    </div>
+    <div class="safety-layer">
+      <div class="n">3</div>
+      <div><h4>Mandatory-tool enforcement + retry loop</h4><p><code>cibrc_safety_check</code> and <code>imd_weather_check</code> declared mandatory in config.yaml. Post-loop inspection scans the message history; if a required tool wasn't called, the agent is re-prompted up to 2 times before the answer is accepted.</p></div>
+    </div>
+    <div class="safety-layer">
+      <div class="n">4</div>
+      <div><h4>RAG pipeline + geo resolution</h4><p>LLM-driven Hinglish keyword extractor ("gehu" → wheat, "dhan" → rice) pulls ICAR ChromaDB + KCC transcript collections. Geo resolver turns (state, district) into the nearest IMD agromet station + Agmark mandi with district-neighbour fallback — making every downstream tool call location-aware.</p></div>
+    </div>
+  </div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A15 — Chemical Safety Implementation -->
+<section class="apx" data-label="A15 Safety Impl">
+  <div class="sec-label">Appendix — Chemical safety implementation</div>
+  <div class="slide-num">A15 / 16</div>
+  <h2>Three stacked layers. A banned chemical cannot survive all three.</h2>
+  <div class="apx-sub">448 CIBRC chemicals loaded at startup. 88 currently banned. Hard block fallback in strict mode.</div>
+  <div class="safety-layers">
+    <div class="safety-layer">
+      <div class="n">1</div>
+      <div><h4>Mandatory <code>cibrc_safety_check</code> tool call</h4><p>Declared mandatory in config.yaml. Post-loop inspection verifies it was called on every chemical-adjacent query. If skipped, the agent is re-prompted up to 2 times before any answer is accepted — the tool call is not optional.</p></div>
+    </div>
+    <div class="safety-layer">
+      <div class="n">2</div>
+      <div><h4>Regex SafetyValidator over final output</h4><p>Precomputed banned-chemical set from the CIBRC CSV. Regex scan runs on the LLM's final answer before it is returned to the client. A match triggers a revision instruction sent back to the LLM with the offending substance named explicitly.</p></div>
+    </div>
+    <div class="safety-layer">
+      <div class="n">3</div>
+      <div><h4>Hard block fallback</h4><p>If the revision round-trip still contains a banned chemical, the response is replaced with a hard refusal — not a disclaimer. In strict mode (one YAML flag), no unsafe answer ever reaches the farmer. All three layers have dedicated test coverage in the 426-test suite.</p></div>
+    </div>
+  </div>
+  <div class="callout"><em>Why three layers?</em> A single prompt warning proved unreliable in testing. Each layer is independently observable, independently toggleable in config.yaml, and independently tested.</div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A16 — Proof of Build -->
+<section class="apx" data-label="A16 Proof of Build">
+  <div class="sec-label">Appendix — Proof of build</div>
+  <div class="slide-num">A16 / 16</div>
+  <h2>Working end-to-end. 426 tests. No mocks on safety or agent paths.</h2>
+  <div class="apx-sub">React Native app → FastAPI → intent router → Gemini agent → safety filter → Sarvam voice → farmer.</div>
+  <div class="apx-2">
+    <div class="apx-card">
+      <h4>Code &amp; test surface</h4>
+      <ul>
+        <li><b>~11,200 LOC Python</b> — 119 files, 15 FastAPI endpoints, 16 LLM-callable tools</li>
+        <li><b>426 unit tests</b> across 44 files — agent, safety, RAG, geo, voice, firebase, every router; all external calls mocked so suite runs offline</li>
+        <li>ruff (E/F/I/UP/B/SIM) + mypy strict on <code>src/</code></li>
+        <li><b>Config-as-code:</b> model IDs, temperatures, tool lists, safety mode in config.yaml; zero-code model swaps via <code>AGRO_MODELS__CHAT=</code> env override</li>
+        <li><b>~3,250 LOC TypeScript</b> — 47 files, 10 screens, 6 Redux slices</li>
+      </ul>
+    </div>
+    <div class="apx-card">
+      <h4>Data corpus wired in</h4>
+      <ul>
+        <li><b>448</b> CIBRC chemicals (88 banned) — loaded at startup</li>
+        <li><b>221k+</b> KCC advisory records ingestable into ChromaDB</li>
+        <li><b>5,294</b> location-hierarchy rows · <b>4,062</b> Agmark mandis</li>
+        <li><b>713</b> IMD agromet stations · <b>600</b> district adjacencies</li>
+        <li>ICAR annual reports, IARI soil manuals, AINP PDFs ingested via Document AI</li>
+        <li>GCP project <code>agrowise-192e3</code>: Vertex AI, Firestore, Cloud Storage, Document AI, FCM all provisioned</li>
+      </ul>
+    </div>
+  </div>
   <div class="foot-brand">Jovara · Appendix</div>
 </section>
 
