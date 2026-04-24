@@ -32,7 +32,8 @@
   "The full stack. Backend is FastAPI on Python 3.11 with LangChain for the agent loop and Gemini 2.5 Flash and Pro on Vertex AI for the LLM. Sarvam handles ASR and TTS across four Indian languages. ChromaDB is the vector store for RAG over ICAR PDFs and 221,000 KCC transcripts. Firebase gives us Firestore for persistence, Cloud Storage for images, and FCM for push alerts. The mobile side is React Native with Expo SDK 54 in TypeScript. Redux Toolkit and RTK Query give us an offline-first typed API surface. The app is fully internationalised in English, Hindi, and Bengali.",
   "The key architectural decision we're most often asked about is why we didn't just bind all the tools to every turn. The answer is cross-contamination. When the market tool is bound on a weather question, Gemini sometimes calls it anyway, which wastes tokens and occasionally produces nonsense. A cheap eight-token classifier that routes to one of eleven intents costs essentially nothing and lets us bind only two to five tools per turn instead of all sixteen. The mandatory-tool enforcement loop is the other decision people ask about — even with explicit prompt instructions, Gemini sometimes answers without calling the safety tool. Post-loop inspection with two retries fixed that.",
   "The safety question. Every jury member in agri-AI has the same concern: what stops the model from recommending a banned pesticide. The answer is three independently failing layers. First: the cibrc_safety_check tool is mandatory and enforced by post-loop inspection with retry. Second: a regex scan of the final text against the precomputed banned-chemical set before it leaves the server. Third: if the regex scan fires and the revision loop still fails, the answer is hard-blocked. The farmer sees a refusal, not a dangerous recommendation. All three layers are separately tested.",
-  "We have working code. 11,200 lines of Python, 426 passing tests, 15 FastAPI endpoints, and a React Native app with 10 screens and three-language i18n. The GCP project is provisioned — Vertex AI, Firestore, Cloud Storage, Document AI, and FCM are all live. The corpus is wired in: 448 CIBRC chemicals, 221,000 KCC records ingestable into ChromaDB, 5,294 location rows, 4,062 mandis, 713 IMD stations. The hardware prototype is in progress. The tool that consumes the sensor data is already live in the backend, waiting for the node to ship."
+  "We have working code. 11,200 lines of Python, 426 passing tests, 15 FastAPI endpoints, and a React Native app with 10 screens and three-language i18n. The GCP project is provisioned — Vertex AI, Firestore, Cloud Storage, Document AI, and FCM are all live. The corpus is wired in: 448 CIBRC chemicals, 221,000 KCC records ingestable into ChromaDB, 5,294 location rows, 4,062 mandis, 713 IMD stations. The hardware prototype is in progress. The tool that consumes the sensor data is already live in the backend, waiting for the node to ship.",
+  "The whole architecture in one diagram. On the left, the AgroSense Spike — our ESP32-plus-capacitive-sensor field node — ships soil moisture, EC and temperature over WiFi or GSM to the cloud. The brain is five stages: Inputs accept voice via Bhasini ASR and images; Analysis routes them through Gemini Flash for multimodal symptom detection; the RAG and context layer grounds answers in ICAR manuals and real-time IMD weather; the safety filter gates every chemical recommendation through the CIBRC database; and Output produces a voice response in the farmer's local language via Bhasini TTS. Users receive it either as a PWA dashboard or as an IVR voice call through Twilio/Exotel. The differentiation box at the bottom is the positioning point: we don't just classify — we explain WHY and WHEN."
 ]
 </script>
 <style>
@@ -770,6 +771,27 @@
   [data-label="A13 Tech Stack"] .apx-card h4,
   [data-label="A16 Proof of Build"] .apx-card h4 { font-size: 26px; margin-bottom: 10px; }
 
+  /* A17 — End-to-end architecture diagram */
+  .apx[data-label="A17 E2E Architecture"] { padding-top: 120px; }
+  .apx[data-label="A17 E2E Architecture"] h2 { font-size: 40px; margin-bottom: 10px; }
+  .apx[data-label="A17 E2E Architecture"] .apx-sub { font-size: 22px; margin-bottom: 24px; }
+  .arch-diagram {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%;
+  }
+  .arch-diagram img {
+    max-width: 100%;
+    max-height: 760px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    background: #fff;
+    padding: 16px;
+    box-shadow: 0 2px 20px rgba(20,17,12,0.08);
+    border: 1px solid var(--border);
+  }
+
   /* Safety 5 layers */
   .safety-layers { display: flex; flex-direction: column; gap: 14px; }
   .safety-layer {
@@ -1446,7 +1468,7 @@
 <!-- A1 — Kharif 2025 -->
 <section class="apx" data-label="A1 Kharif 2025">
   <div class="sec-label">Appendix — Kharif 2025</div>
-  <div class="slide-num">A1 / 16</div>
+  <div class="slide-num">A1 / 17</div>
   <h2>3.88 crore farmers. 13 states. SMS-triggered proactive advisory.</h2>
   <div class="apx-sub">Who built it?</div>
   <div class="apx-2">
@@ -1472,7 +1494,7 @@
 <!-- A2 — BharatGen partnership -->
 <section class="apx" data-label="A2 BharatGen">
   <div class="sec-label">Appendix — BharatGen posture</div>
-  <div class="slide-num">A2 / 16</div>
+  <div class="slide-num">A2 / 17</div>
   <h2>Partnership, not competition.</h2>
   <div class="apx-sub">BharatGen is the foundation. Jovara builds on top.</div>
   <div class="apx-2">
@@ -1493,7 +1515,7 @@
 <!-- A3 — Safety architecture -->
 <section class="apx" data-label="A3 Safety">
   <div class="sec-label">Appendix — Safety architecture</div>
-  <div class="slide-num">A3 / 16</div>
+  <div class="slide-num">A3 / 17</div>
   <h2>Five layers that make proactive advisory safe to ship.</h2>
   <div class="apx-sub">No Indian AI advisory composes all five. We're first.</div>
   <div class="safety-layers">
@@ -1524,7 +1546,7 @@
 <!-- A4 — Spike -->
 <section class="apx" data-label="A4 Spike">
   <div class="sec-label">Appendix — Spike sensor</div>
-  <div class="slide-num">A4 / 16</div>
+  <div class="slide-num">A4 / 17</div>
   <h2>The sensor that closes the ground-truth gap.</h2>
   <div class="apx-sub">Below satellite and weather-station resolution floors, at sub-₹1,000 BOM.</div>
   <div class="apx-2">
@@ -1555,7 +1577,7 @@
 <!-- A5 — Unit economics -->
 <section class="apx" data-label="A5 Unit economics">
   <div class="sec-label">Appendix — Unit economics</div>
-  <div class="slide-num">A5 / 16</div>
+  <div class="slide-num">A5 / 17</div>
   <h2>Who pays the ₹52 crore a year in outbound distribution?</h2>
   <div class="apx-sub">1 crore farmers × 2 nudges/week × ₹0.50 average ≈ ₹52 cr/year</div>
 
@@ -1576,7 +1598,7 @@
 <!-- A6 — Funding cascade -->
 <section class="apx" data-label="A6 30-month plan">
   <div class="sec-label">Appendix — Funding cascade</div>
-  <div class="slide-num">A6 / 16</div>
+  <div class="slide-num">A6 / 17</div>
   <h2>A 12-month runway optimised for B2B SaaS breaks at month 13.</h2>
   <div class="apx-sub">We plan for 30.</div>
 
@@ -1601,7 +1623,7 @@
 <!-- A7 — Why West Bengal -->
 <section class="apx" data-label="A7 West Bengal">
   <div class="sec-label">Appendix — Why West Bengal</div>
-  <div class="slide-num">A7 / 16</div>
+  <div class="slide-num">A7 / 17</div>
   <h2>Network, not map.</h2>
   <div class="apx-sub">Pilot-state choice is a founder-network decision. Ours happens to be coherent with the market thesis.</div>
   <div class="apx-2">
@@ -1630,7 +1652,7 @@
 <!-- A8 — Competitive table -->
 <section class="apx" data-label="A8 Competitive">
   <div class="sec-label">Appendix — The full landscape</div>
-  <div class="slide-num">A8 / 16</div>
+  <div class="slide-num">A8 / 17</div>
   <h2>Who's doing what with government.</h2>
   <div class="apx-sub">Of ten players, only three have deep government relationships. None ships full-featured proactive.</div>
   <table class="apx-table">
@@ -1656,7 +1678,7 @@
 <!-- A9 — Plantix anti-pattern -->
 <section class="apx" data-label="A9 Anti-pattern">
   <div class="sec-label">Appendix — The anti-pattern</div>
-  <div class="slide-num">A9 / 16</div>
+  <div class="slide-num">A9 / 17</div>
   <h2>Advisory that makes money from pesticide commissions drifts.</h2>
   <div class="apx-sub">State governments know this failure mode. It's why the B2G channel is open to a product that structurally cannot monetise through input commissions.</div>
   <div class="alert-card">
@@ -1676,7 +1698,7 @@
 <!-- A10 — Compliance -->
 <section class="apx" data-label="A10 Compliance">
   <div class="sec-label">Appendix — Regulatory / DPDP</div>
-  <div class="slide-num">A10 / 16</div>
+  <div class="slide-num">A10 / 17</div>
   <h2>Day-1 compliance, not a year-2 retrofit.</h2>
   <div class="apx-sub">For a B2G company, compliance is marketing. The state's Law Department is the gate we have to clear.</div>
   <div class="apx-2">
@@ -1703,7 +1725,7 @@
 <!-- A11 — Demo -->
 <section class="apx" data-label="A11 Demo">
   <div class="sec-label">Appendix — The demo</div>
-  <div class="slide-num">A11 / 16</div>
+  <div class="slide-num">A11 / 17</div>
   <h2>What the product actually does.</h2>
   <div class="apx-sub">Three frames. The refusal is the trust moment.</div>
   <div class="demo-steps">
@@ -1738,7 +1760,7 @@
 <!-- A12 — Sources -->
 <section class="apx" data-label="A12 Sources">
   <div class="sec-label">Appendix — Sources</div>
-  <div class="slide-num">A12 / 16</div>
+  <div class="slide-num">A12 / 17</div>
   <h2>The numbers, where they come from.</h2>
   <div class="apx-sub">Every figure in this deck is traceable.</div>
   <div class="sources">
@@ -1762,7 +1784,7 @@
 <!-- A13 — Tech Stack -->
 <section class="apx" data-label="A13 Tech Stack">
   <div class="sec-label">Appendix — Technical stack</div>
-  <div class="slide-num">A13 / 16</div>
+  <div class="slide-num">A13 / 17</div>
   <h2>FastAPI · LangChain · Gemini · Sarvam. Built for India's infra.</h2>
   <div class="apx-sub">~11.2k LOC Python backend. React Native mobile. GCP infra. 33+ commits since March 2025.</div>
   <div class="apx-2">
@@ -1797,7 +1819,7 @@
 <!-- A14 — Agentic Architecture -->
 <section class="apx" data-label="A14 Architecture">
   <div class="sec-label">Appendix — Agentic architecture</div>
-  <div class="slide-num">A14 / 16</div>
+  <div class="slide-num">A14 / 17</div>
   <h2>One cheap classifier. 11 intents. Only the right tools bound per turn.</h2>
   <div class="apx-sub">Tool-call bloat and cross-contamination solved without fine-tuning.</div>
   <div class="safety-layers">
@@ -1824,7 +1846,7 @@
 <!-- A15 — Chemical Safety Implementation -->
 <section class="apx" data-label="A15 Safety Impl">
   <div class="sec-label">Appendix — Chemical safety implementation</div>
-  <div class="slide-num">A15 / 16</div>
+  <div class="slide-num">A15 / 17</div>
   <h2>Defense-in-depth. Three layers. A banned chemical cannot survive all three.</h2>
   <div class="apx-sub">448 CIBRC chemicals loaded at startup. 88 currently banned. Earlier post-hoc classifier removed once this stack was proven sufficient.</div>
   <div class="safety-layers">
@@ -1848,7 +1870,7 @@
 <!-- A16 — Proof of Build -->
 <section class="apx" data-label="A16 Proof of Build">
   <div class="sec-label">Appendix — Proof of build</div>
-  <div class="slide-num">A16 / 16</div>
+  <div class="slide-num">A16 / 17</div>
   <h2>Working end-to-end. 426 tests. All external calls mocked, suite runs offline.</h2>
   <div class="apx-sub">React Native app → FastAPI → intent router → Gemini agent → safety filter → Sarvam voice → farmer.</div>
   <div class="apx-2">
@@ -1873,6 +1895,18 @@
         <li>GCP project <code>agrowise-192e3</code>: Vertex AI, Firestore, Cloud Storage, Document AI, FCM all provisioned</li>
       </ul>
     </div>
+  </div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A17 — End-to-end architecture diagram -->
+<section class="apx" data-label="A17 E2E Architecture">
+  <div class="sec-label">Appendix — End-to-end architecture</div>
+  <div class="slide-num">A17 / 17</div>
+  <h2>Farm → Brain → Farmer. The whole pipeline on one page.</h2>
+  <div class="apx-sub">AgroSense Spike on the field · Gemini + RAG + CIBRC safety in the cloud · Bhasini voice out to PWA and IVR.</div>
+  <div class="arch-diagram">
+    <img src="assets/architecture-diagram.png" alt="End-to-end Jovara architecture: AgroSense Spike (ESP32 + capacitive sensor + solar) sends data via WiFi/GSM to the cloud brain, which routes through Inputs (Bhasini ASR + image), Analysis (Gemini Flash multi-modal), RAG & Context (ICAR manuals + IMD API), Safety Filter (CIBRC banned-chemical check), and Output (Bhasini TTS voice in local language) — delivered to users as PWA dashboard or IVR voice calls." />
   </div>
   <div class="foot-brand">Jovara · Appendix</div>
 </section>
