@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Jovara — AMD Slingshot Regional Demo Day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+<script type="application/json" id="speaker-notes">
+[
+  "I'm Devansh. With my co-founders Animesh and Prem, I'm building Jovara at IIT Kharagpur. We're solving a problem India has been trying to solve for twenty years — how a marginal farmer gets trustworthy, timely advice. In the next seven minutes I'll show you why the current answers don't work, what we're building, and why now is the moment.",
+  "This number is the pitch. The Kisan Call Centre — the government's flagship farmer-advisory service — collapsed by 40% in two years. Not because service got worse. Unanswered rates stayed under 5%. Farmers stopped calling because the cost of the call exceeds the value of what they get back. The government has publicly committed to replacing this stack. We're building what should replace it.",
+  "Ruma is a real persona we've built. She's in Murshidabad — three hours from our campus. She can't read a paragraph comfortably. Her land is 0.4 hectares. If she makes one wrong decision — a spray, a sowing date, a sale — she loses the season. India has 86 million farmers like her. The extension system was supposed to help, but there's one officer for every 1,162 farmers, and only 6.8% of farmers report ever seeing one. This is a coverage problem, not a training problem. No state can hire its way out.",
+  "This is the whole competitive landscape for Indian agri-AI advisory in one slide. Every full-featured product that farmers use today is reactive — the farmer has to ask. Every proactive product is narrow — one pest, one event, one crop. The top-right quadrant — proactive and full-featured — is genuinely empty. That's where we are.",
+  "Three bets. First: proactive beats reactive, because the data proves farmers stopped responding to reactive channels. Second: multi-layer grounding — we're the only advisory in India that literally cannot recommend an off-label pesticide, because the system checks the government register before it speaks. Third: voice-first — because 40% of farmers are low-literacy or on feature phones, and no smartphone-text product reaches them.",
+  "The stack. Bottom to top — our Spike sensor gives us ground truth no satellite can reach at sub-half-hectare resolution. Above that, we integrate with AgriStack, the national farmer-ID layer, plus Krishi-DSS satellite feeds and the soil-health-card database. The AI layer uses Sarvam — India's frontier Indic-language AI — for voice across 10+ Indian languages, and an LLM for reasoning. The grounding layer is where our differentiator lives: every spray recommendation is gated through the government pesticide registry and ICAR's official crop guidance. Low-confidence cases go to a human reviewer — a KVK agronomist — before the answer is sent. The orchestration layer is the proactive event engine that watches weather, pest, and scheme triggers and pushes alerts. The farmer hears it all as a voice message in her language.",
+  "Four things changed in eighteen months. AgriStack — India's national farmer-ID system — went from proposal to 9.2 crore registered farmers. Sarvam — India's frontier Indic-language AI — went from beta to production-ready in 22 languages. Saagu Baagu in Telangana published peer-reviewed results showing a 21% yield increase with AI advisory. And the Ministry of Agriculture publicly announced it's replacing the Kisan Call Centre stack. The distribution rails, the voice infrastructure, the evidence, and the policy opening all landed in the same window. This is why we're building now.",
+  "The honest model. BharatAgri raised $15 million on farmer-pay subscriptions and did ₹10 crore of revenue last year. Every D2C agri-tech in India is struggling. We're building for the government as the paying customer. West Bengal is our pilot state — not because we read a report, but because we're at IIT Kharagpur, in West Bengal, with institutional access to the state agriculture department and the KVK network. The plan is honest: thirty months of runway to first government purchase order, built on non-dilutive grants in the first year, B2G-literate seed in year two, and state contracts from year three.",
+  "We're three founders at IIT Kharagpur. Devansh and Animesh handle the tech. Prem handles finance and operations. We've done the research. We've built the relationships inside our institute. We've mapped the 30-month path to our first government contract. What we need from AMD is compute access for training and inference, mentorship on edge deployment for our sensor fleet, and — honestly — a warm introduction. Thank you.",
+  "This is the single competitive question I take seriously. The Kharif 2025 pilot is the only real precedent for proactive agri-advisory at population scale in India. It's SMS-only, single-event, and almost certainly a multi-ministry collaboration rather than a product. Our plan is to find out who's scaling it, and position against it clearly. In the worst case — it becomes a permanent central layer — there's still room for a sensing-backed, multi-layer-grounded state-level deployment. But the honest answer is: we're finding out.",
+  "BharatGen is the right LLM layer for us to build on, not compete with. They have IIT-Bombay credibility and central-government positioning. Our moat lives one layer up — in proactive orchestration, in our sensing layer, and in the multi-layer grounding composition. We'd partner, not replicate.",
+  "The five layers. Each one exists somewhere. Farmer.Chat grounds on call-centre logs. Krishi Sathi on ICAR. Kisan e-Mitra on scheme templates. But no one composes them — and the composition is the positioning flag. A Secretary Agriculture can sign off on a product that cannot recommend an unregistered chemical and has an full audit trail for every message. That's what earns the first purchase order.",
+  "The Spike is the reason our advisory is better than a satellite-only competitor's. At sub-half-hectare, satellite and weather-station data hit resolution limits. Self-report is noisy. We deploy a roughly thousand-rupee sensor at anchor-farmer plots that gives us real-time soil moisture, electrical conductivity, and temperature. It feeds the advisory. And aggregated, it becomes a macro-data asset we offer back to the state — which is the answer to 'why does the state keep paying us after year one?'",
+  "This is the question that kills B2G agri-tech pitches. At scale, outbound distribution costs are material. Our committed architecture is SMS-triggered pull IVR — the farmer dials in, doesn't receive outbound — which collapses cost to the SMS rate. Outbound voice is reserved for critical alerts where institutional-authority trust matters. The 52-crore-a-year cost lives inside a per-farmer contract with the state, or on government-owned voice infrastructure like Bhashini. Both are live precedents.",
+  "Honest timeline. 18 to 24 months from first government meeting to first purchase order. 6 to 9 more months to payment realisation. That's the number that kills undercapitalised agri-tech startups. Our cascade avoids dilution in year one through grants, raises a B2G-literate seed in year two, and only takes on state contracts in year three. Most importantly, we avoid generalist VCs who won't underwrite 180-day government receivables.",
+  "We didn't pick West Bengal from a spreadsheet. We picked it because we're in it. IIT Kharagpur is in West Bengal. Our Agricultural Engineering faculty is three buildings away. The KVK network is accessible through the institute. And eastern India has the highest density of grant-making orchestrators — JEEViKA in Bihar, OLM in Odisha. Pilot-state choice is a founder-network decision; ours happens to align with where the grant infrastructure is warmest.",
+  "Full landscape. Of ten players, only three — CropIn, Farmer.Chat, Wadhwani — have deep government relationships. None of them ships a full-featured proactive product. Plantix actively avoids government because its revenue comes from pesticide retailers. Stellapps is the closest template for our sensing-plus-software model, but for dairy, not crops. We're the only entrant positioning proactive plus B2G plus sensing-backed.",
+  "This is the anti-pattern we design against. Plantix started as a free pest-ID tool and ended up an advertising channel for pesticide retailers. A German agrochemical distributor bought them in 2023. Indian state governments know this story, and they're wary of any advisory with retailer-commission revenue. Our B2G-only model is a structural defence — we literally cannot be paid to recommend a specific product.",
+  "Compliance architecture is not a secondary concern for us; it's primary. DPDP Rules came into force last November. Any AgriStack integration requires consent-manager compliance on day one. We've designed for this from the start — three-tap data export, secure Aadhaar vault, full audit log. For a B2G company selling to state Law Departments, this compliance architecture is the first thing a Secretary's office will verify. It's a feature, not overhead.",
+  "This is the demo we'll walk through live if there's time. Three frames — the farmer asks, the system refuses the unregistered option, the system offers the registered alternative with a clear source. The refusal isn't a failure state; it's the product's trust moment. This is what we'll have running end-to-end by Demo Day.",
+  "If anyone wants to follow up on specific numbers, here are the sources. We can share the full research memo — it's roughly 80 pages — after the event."
+]
+</script>
+<style>
+  :root {
+    --ink: #0B2239;
+    --ink-2: #1A3A5C;
+    --leaf: #2E5B3E;
+    --turmeric: #C08A2E;
+    --canvas: #F7F4EE;
+    --card: #FFFFFF;
+    --text: #141821;
+    --text-2: #475063;
+    --border: #E4E0D6;
+    --alert: #B54A3A;
+    --sans: 'IBM Plex Sans', system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+    --serif: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+    --bn: 'Hind Siliguri', 'IBM Plex Sans', system-ui, sans-serif;
+  }
+  html, body { margin: 0; padding: 0; background: #000; color: var(--text); font-family: var(--sans); }
+  deck-stage { background: #000; }
+
+  section {
+    background: var(--canvas);
+    color: var(--text);
+    font-family: var(--sans);
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 96px 120px;
+  }
+
+  /* Section label */
+  .sec-label {
+    position: absolute;
+    top: 56px;
+    left: 120px;
+    font-family: var(--mono);
+    font-size: 24px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    display: flex; align-items: center; gap: 16px;
+  }
+  .sec-label::before {
+    content: "";
+    width: 44px; height: 1px; background: var(--ink);
+    display: inline-block;
+  }
+  .slide-num {
+    position: absolute;
+    top: 56px; right: 120px;
+    font-family: var(--mono);
+    font-size: 24px;
+    letter-spacing: 0.08em;
+    color: var(--text-2);
+  }
+  .foot-brand {
+    position: absolute;
+    bottom: 40px; left: 120px;
+    font-family: var(--mono); font-size: 18px; letter-spacing: 0.22em;
+    color: color-mix(in srgb, var(--text-2) 55%, transparent); text-transform: uppercase;
+    font-weight: 500;
+  }
+  .foot-right {
+    position: absolute; bottom: 40px; right: 120px;
+    font-family: var(--mono); font-size: 18px; letter-spacing: 0.14em;
+    color: color-mix(in srgb, var(--text-2) 55%, transparent);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .foot-brand::before, .foot-right::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: -14px;
+    height: 1px; background: color-mix(in srgb, var(--text-2) 20%, transparent);
+    pointer-events: none;
+  }
+
+  h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -0.01em; }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 24px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--leaf);
+  }
+
+  /* ========== SLIDE 1: Title ========== */
+  .title-slide {
+    background: var(--ink);
+    color: var(--canvas);
+    padding: 120px;
+  }
+  .title-slide .sec-label, .title-slide .foot-brand, .title-slide .foot-right, .title-slide .slide-num {
+    color: rgba(247,244,238,0.6);
+  }
+  .title-slide .foot-brand::before, .title-slide .foot-right::before { background: rgba(247,244,238,0.18); }
+  .title-slide .sec-label::before { background: rgba(247,244,238,0.6); }
+  .jovara-mark {
+    font-family: var(--sans);
+    font-size: 200px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    margin-top: 60px;
+  }
+  .jovara-mark .dot { color: var(--turmeric); }
+  .title-tag {
+    font-family: var(--sans);
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1.25;
+    max-width: 1300px;
+    margin-top: 48px;
+    color: rgba(247,244,238,0.92);
+  }
+  .title-tag em { color: var(--turmeric); font-style: normal; }
+  .title-meta {
+    position: absolute;
+    bottom: 120px; left: 120px;
+    display: flex; gap: 96px;
+    font-size: 22px;
+  }
+  .title-meta .k { font-family: var(--mono); font-size: 24px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(247,244,238,0.5); margin-bottom: 10px; }
+  .title-meta .v { font-size: 30px; line-height: 1.4; color: var(--canvas); }
+  .title-badge {
+    position: absolute;
+    top: 80px; right: 120px;
+    padding: 16px 28px;
+    border: 1px solid rgba(247,244,238,0.3);
+    border-radius: 9999px;
+    font-family: var(--mono); font-size: 24px; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--canvas);
+  }
+
+  /* ========== SLIDE 2 extras ========== */
+  .hook-kicker { font-family: var(--sans); font-size: 180px; font-weight: 700; color: var(--alert); line-height: 0.9; letter-spacing: -0.05em; margin-bottom: 24px; }
+  .hook-right h2 { font-size: 72px; font-weight: 600; color: var(--ink); line-height: 1.02; letter-spacing: -0.025em; margin: 0 0 32px; }
+  .hook-right h2 em { font-style: normal; color: var(--turmeric); }
+
+  /* ========== SLIDE 5 extras ========== */
+  .bet-top { display: flex; justify-content: space-between; align-items: center; }
+  .bet-stat { display: flex; align-items: baseline; gap: 18px; padding: 24px 0; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--border); }
+  .bs-num { font-family: var(--sans); font-size: 120px; font-weight: 600; color: var(--turmeric); line-height: 1; letter-spacing: -0.04em; }
+  .bs-unit { font-family: var(--mono); font-size: 24px; color: var(--text-2); letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.25; }
+  .bs-strike { font-family: var(--mono); font-size: 24px; color: var(--text-2); letter-spacing: 0.08em; text-transform: uppercase; text-decoration: line-through; text-decoration-color: var(--alert); text-decoration-thickness: 3px; }
+
+  /* ========== SLIDE 7 extras ========== */
+  .tl-stat { font-family: var(--sans); font-size: 84px; font-weight: 600; color: var(--ink); line-height: 1; letter-spacing: -0.03em; margin: 12px 0 16px; }
+  .whynow-converge { display: grid; grid-template-rows: auto auto; gap: 24px; }
+  .rails-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .rail-col { padding: 20px 32px 20px 0; border-right: 1px solid var(--border); position: relative; }
+  .rail-col:last-child { border-right: none; }
+  .rail-col::before { content: ""; position: absolute; left: 0; top: -6px; width: 48px; height: 4px; background: var(--turmeric); border-radius: 2px; }
+  .rail-k { font-family: var(--mono); font-size: 24px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-2); margin-bottom: 10px; }
+  .rail-v { font-family: var(--sans); font-size: 44px; font-weight: 600; color: var(--ink); line-height: 1; letter-spacing: -0.02em; }
+  .conv-payoff { display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center; padding-top: 22px; border-top: 3px solid var(--ink); }
+  .conv-label { font-family: var(--mono); font-size: 24px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--turmeric); font-weight: 600; line-height: 1.25; }
+  .conv-headline { font-size: 48px; font-weight: 600; color: var(--ink); line-height: 1.05; letter-spacing: -0.02em; }
+  .conv-headline em { font-style: normal; color: var(--turmeric); }
+
+  /* ========== SLIDE 8 extras ========== */
+  .gtm-slide { padding-top: 120px !important; display: grid !important; grid-template-rows: auto auto !important; gap: 60px !important; padding-bottom: 180px !important; }
+  .gtm-body { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 72px; align-items: start; }
+  .gtm-left { display: flex; flex-direction: column; gap: 36px; }
+  .gtm-left h2.gtm-big { font-size: 132px; font-weight: 600; color: var(--ink); line-height: 0.88; letter-spacing: -0.045em; margin: 0; }
+  .gtm-left h2.gtm-big em { font-style: normal; color: var(--turmeric); }
+  .gtm-left { display: flex; flex-direction: column; gap: 28px; }
+  .gtm-versus { display: flex; flex-direction: column; gap: 0; padding-top: 28px; }
+  .gv-row { display: flex; flex-direction: column; gap: 10px; padding: 20px 0; }
+  .gv-who { font-family: var(--mono); font-size: 24px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--text-2); }
+  .gv-no .gv-who { color: color-mix(in srgb, var(--alert) 70%, var(--ink) 30%); }
+  .gv-yes .gv-who { color: var(--leaf); }
+  .gv-arc { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
+  .gv-in { font-family: var(--sans); font-size: 34px; font-weight: 500; color: var(--text-2); letter-spacing: -0.01em; }
+  .gv-arr { font-family: var(--sans); font-size: 32px; font-weight: 300; color: var(--text-2); }
+  .gv-out { font-family: var(--sans); font-size: 34px; font-weight: 600; color: var(--ink); letter-spacing: -0.015em; }
+  .gv-no .gv-out { color: color-mix(in srgb, var(--alert) 65%, var(--ink) 35%); }
+  .gv-out-big { font-size: 56px; font-weight: 600; color: var(--leaf); letter-spacing: -0.025em; line-height: 1; }
+  .gv-div { height: 1px; background: var(--border); }
+  .gtm-sub-line { font-family: var(--serif); font-size: 56px; font-weight: 400; color: var(--ink); line-height: 1; letter-spacing: -0.025em; margin-top: 12px; font-style: italic; }
+
+  .gtm-right { display: flex; flex-direction: column; gap: 24px; padding-top: 12px; }
+  .staircase { display: flex; flex-direction: column; gap: 18px; }
+  .stair-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; border-bottom: 2px solid var(--ink); }
+  .stair-k { font-family: var(--mono); font-size: 24px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--turmeric); font-weight: 600; }
+  .stair-v { font-family: var(--mono); font-size: 24px; color: var(--text-2); letter-spacing: 0.04em; }
+  .stair-row { display: flex; flex-direction: column; gap: 8px; }
+  .sr-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; }
+  .sr-meta-l { font-family: var(--mono); font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-2); font-weight: 600; }
+  .sr-meta-l em { font-style: normal; color: var(--ink); margin-right: 12px; }
+  .sr-meta-r { font-family: var(--sans); font-size: 22px; color: var(--ink); font-weight: 500; letter-spacing: -0.005em; }
+  .sr-bar { height: 70px; background: var(--ink); border-radius: 8px; display: flex; align-items: center; gap: 20px; padding: 0 24px; color: var(--canvas); width: var(--w); }
+  .sr-po .sr-bar { background: var(--leaf); }
+  .sr-scale .sr-bar { background: var(--turmeric); color: var(--ink); width: 100%; }
+  .sr-phase { font-family: var(--mono); font-size: 22px; font-weight: 600; letter-spacing: 0.12em; opacity: 0.7; }
+  .sr-amt { font-family: var(--sans); font-size: 34px; font-weight: 600; letter-spacing: -0.015em; }
+  .sr-tail { font-family: var(--mono); font-size: 20px; color: var(--ink); opacity: 0.75; margin-left: auto; letter-spacing: 0.06em; }
+
+  .gtm-math { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 24px; align-items: stretch; padding-top: 20px; border-top: 3px solid var(--ink); }
+  .gm-cell { display: flex; flex-direction: column; gap: 6px; padding: 4px 0; }
+  .gm-cell-out { padding: 6px 20px; background: var(--turmeric); border-radius: 6px; }
+  .gm-cell-out .gm-k, .gm-cell-out .gm-v, .gm-cell-out .gm-s { color: var(--ink); }
+  .gm-k { font-family: var(--mono); font-size: 24px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-2); font-weight: 600; }
+  .gm-v { font-family: var(--sans); font-size: 48px; font-weight: 600; color: var(--ink); line-height: 1; letter-spacing: -0.025em; }
+  .gm-s { font-family: var(--mono); font-size: 24px; color: var(--text-2); letter-spacing: 0.04em; }
+  .gm-cell-out .gm-s { color: var(--ink); opacity: 0.75; }
+  .gm-op { font-family: var(--sans); font-size: 48px; font-weight: 300; color: var(--text-2); align-self: center; line-height: 1; }
+
+  /* ========== SLIDE 2: The hook ========== */
+  .hook-slide { display: grid; grid-template-rows: auto auto; gap: 56px; padding-top: 160px; padding-bottom: 110px; }
+  .hook-top { display: grid; grid-template-columns: 1.15fr 1fr; gap: 80px; align-items: start; position: relative; }
+  .hook-top::before {
+    content: "";
+    position: absolute;
+    left: calc(53.5% - 40px);
+    top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--border);
+  }
+  .hook-top > div:first-of-type { padding-top: 0; }
+  .hook-stat {
+    font-family: var(--sans);
+    font-size: 260px;
+    line-height: 0.9;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  .hook-stat .arrow { color: var(--turmeric); margin: 0 0.05em; }
+  .hook-stat .after { color: var(--turmeric); }
+  .hook-unit { font-family: var(--mono); font-size: 28px; color: var(--text-2); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 40px; }
+  .hook-caption { font-family: var(--sans); font-size: 44px; font-weight: 500; line-height: 1.15; letter-spacing: -0.02em; color: var(--ink); margin-top: 48px; max-width: 620px; }
+  .hook-caption em { font-style: normal; color: var(--alert); font-weight: 600; }
+  .hook-right h2 { font-size: 56px; line-height: 1.1; font-weight: 600; color: var(--ink); margin-bottom: 32px; }
+  .hook-right p { font-size: 28px; line-height: 1.5; color: var(--text); max-width: 560px; margin: 0 0 24px; }
+  .hook-right .emph { color: var(--turmeric); font-weight: 600; }
+  .hook-source { font-family: var(--mono); font-size: 24px; color: var(--text-2); margin-top: 40px; letter-spacing: 0.04em; }
+  .hook-bottom { display: grid; grid-template-rows: auto auto auto auto; gap: 14px; padding-top: 32px; border-top: 3px solid var(--ink); }
+  .hook-bar-row { display: grid; grid-template-columns: 180px 1fr; gap: 32px; align-items: center; }
+  .hbr-lab { font-family: var(--mono); font-size: 26px; letter-spacing: 0.04em; color: var(--text); }
+  .hbr-bar { position: relative; height: 56px; background: transparent; }
+  .hbr-fill { height: 100%; display: flex; align-items: center; padding: 0 24px; color: var(--canvas); font-family: var(--sans); font-weight: 600; }
+  .hbr-fill.hbr-after { background: var(--alert); color: var(--canvas); }
+  .hbr-num { font-size: 26px; letter-spacing: -0.01em; }
+  .hook-bottom-note { font-family: var(--sans); font-size: 32px; font-weight: 500; color: var(--ink); margin-top: 18px; letter-spacing: -0.01em; }
+
+  /* ========== SLIDE 3: Problem (redesigned) ========== */
+  .problem-slide {
+    padding: 0 !important;
+    display: grid !important;
+    grid-template-columns: 780px 1fr !important;
+    gap: 0 !important;
+    overflow: hidden !important;
+    height: 1080px;
+  }
+  .problem-slide .sec-label { left: 56px; top: 56px; z-index: 4; color: rgba(247,244,238,0.75); }
+  .problem-slide .sec-label::before { background: rgba(247,244,238,0.3); }
+  .problem-slide .slide-num { right: 88px; top: 56px; z-index: 3; }
+
+  .persona-frame {
+    position: relative;
+    background: #14110C;
+    overflow: hidden;
+    height: 1080px;
+  }
+  .persona-image {
+    position: absolute; inset: 0;
+    background-image: url('assets/ruma-portrait.svg');
+    background-size: cover;
+    background-position: center 30%;
+  }
+  .persona-image::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,8,6,0.92) 0%, rgba(10,8,6,0.7) 22%, rgba(10,8,6,0.1) 45%, rgba(10,8,6,0) 60%);
+  }
+  .persona-caption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    z-index: 2;
+    padding: 48px 56px 100px;
+    display: flex; flex-direction: column; gap: 14px;
+    color: var(--canvas);
+  }
+  .persona-kicker {
+    font-family: var(--mono); font-size: 24px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: rgba(247,244,238,0.7); font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .persona-name-new {
+    font-family: var(--sans); font-size: 80px; font-weight: 600;
+    color: var(--canvas); line-height: 0.96; letter-spacing: -0.03em;
+  }
+  .persona-meta-new {
+    font-family: var(--mono); font-size: 24px; color: rgba(247,244,238,0.75);
+    line-height: 1.5; letter-spacing: 0.04em;
+  }
+  .persona-quote-new {
+    font-family: var(--bn); font-size: 32px; line-height: 1.32;
+    color: var(--canvas); font-weight: 400;
+    border-left: 4px solid var(--turmeric); padding-left: 22px; margin-top: 14px;
+    max-width: 640px;
+  }
+
+  .persona-analysis {
+    background: var(--canvas);
+    padding: 120px 88px 88px;
+    display: flex; flex-direction: column; justify-content: center;
+    height: 1080px;
+    max-height: 1080px;
+    overflow: hidden;
+    position: relative;
+    gap: 72px;
+    box-sizing: border-box;
+  }
+  .pa-top {
+    display: flex; flex-direction: column; gap: 24px;
+  }
+  .pa-eyebrow {
+    font-family: var(--mono); font-size: 24px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--text-2); font-weight: 600;
+  }
+  .pa-hero {
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .pa-num {
+    font-family: var(--sans); font-size: 200px; font-weight: 600;
+    color: var(--ink); line-height: 0.85; letter-spacing: -0.05em;
+  }
+  .pa-num em { font-style: normal; color: var(--turmeric); }
+  .pa-headline {
+    font-family: var(--sans); font-size: 36px; font-weight: 500;
+    color: var(--ink); line-height: 1.15; letter-spacing: -0.015em;
+    max-width: 780px;
+  }
+  .pa-headline em { font-style: normal; color: var(--turmeric); font-weight: 600; }
+
+  .pa-stats {
+    display: grid; grid-template-columns: 1fr;
+    border-top: 2px solid var(--ink);
+  }
+  .pa-stat {
+    display: grid; grid-template-columns: 240px 1fr;
+    align-items: center; gap: 28px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .pa-stat:last-child { border-bottom: none; padding-bottom: 0; }
+  .pa-stat-num {
+    font-family: var(--sans); font-size: 44px; font-weight: 600;
+    color: var(--ink); line-height: 1; letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .pa-stat-body {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .pa-stat-unit {
+    font-family: var(--mono); font-size: 24px; color: var(--ink);
+    letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600;
+  }
+  .pa-stat-label {
+    font-family: var(--sans); font-size: 24px; color: var(--text-2); line-height: 1.4;
+  }
+
+  /* Override footer positioning per column in slide 3 */
+  .persona-frame .foot-brand {
+    position: absolute; left: 56px; bottom: 40px;
+    color: rgba(247,244,238,0.75); z-index: 3;
+  }
+  .persona-frame .foot-brand::before { background: rgba(247,244,238,0.3); }
+  .persona-analysis .foot-right {
+    position: absolute; right: 88px; bottom: 32px;
+    color: var(--text-2);
+  }
+
+  /* ========== SLIDE 4: Landscape (redesigned) ========== */
+  .landscape-slide { padding-top: 120px; padding-bottom: 100px; display: grid; grid-template-rows: auto 1fr auto; gap: 44px; }
+  .landscape-head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 40px; }
+  .landscape-title { font-size: 80px; font-weight: 600; color: var(--ink); line-height: 1.02; letter-spacing: -0.03em; max-width: 1400px; }
+  .landscape-title em { font-style: normal; color: var(--turmeric); }
+  .landscape-kicker { font-family: var(--mono); font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-2); text-align: right; line-height: 1.5; }
+  .landscape-kicker strong { color: var(--ink); font-weight: 600; display: block; margin-top: 4px; font-size: 22px; }
+
+  .landscape-body { display: flex; justify-content: center; }
+
+  /* --- Plotted matrix (hero) --- */
+  .matrix {
+    position: relative;
+    width: 100%;
+    max-width: 1520px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 50px 70px 70px 140px;
+  }
+  .matrix-axes { position: relative; height: 480px; }
+  .matrix-x0, .matrix-y0 {
+    position: absolute;
+    background: var(--ink);
+    opacity: 0.18;
+  }
+  .matrix-x0 { left: 0; right: 0; top: 50%; height: 1px; }
+  .matrix-y0 { top: 0; bottom: 0; left: 50%; width: 1px; }
+  .matrix-ylab, .matrix-xlab {
+    position: absolute;
+    font-family: var(--mono); font-size: 18px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--ink); font-weight: 600;
+  }
+  .matrix-ylab.top, .matrix-ylab.bot {
+    left: -92px;
+    width: 120px;
+    text-align: right;
+  }
+  .matrix-ylab.top { top: 0; }
+  .matrix-ylab.bot { bottom: 0; }
+  .matrix-xlab.left { bottom: -44px; left: 0; }
+  .matrix-xlab.right { bottom: -44px; right: 0; }
+  .matrix-yarrow { position: absolute; left: -42px; top: 0; bottom: 0; width: 1px; background: var(--ink); opacity: 0.4; }
+  .matrix-xarrow { position: absolute; left: 0; right: 0; bottom: -20px; height: 1px; background: var(--ink); opacity: 0.4; }
+
+  .dot {
+    position: absolute;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--ink);
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+  .dot::after {
+    content: attr(data-name);
+    position: absolute;
+    left: 30px; top: 50%; transform: translateY(-50%);
+    font-family: var(--sans); font-size: 26px; font-weight: 500;
+    color: var(--ink); white-space: nowrap;
+    letter-spacing: -0.01em;
+  }
+  .dot.left::after { left: auto; right: 30px; }
+  .dot.jovara {
+    width: 34px; height: 34px; background: var(--turmeric);
+    box-shadow: 0 0 0 10px rgba(212,145,40,0.20), 0 0 0 24px rgba(212,145,40,0.08);
+  }
+  .dot.jovara::after {
+    content: "Jovara";
+    font-size: 44px; font-weight: 700; color: var(--turmeric); letter-spacing: -0.025em;
+    left: 44px;
+  }
+  .empty-badge {
+    position: absolute;
+    top: 40px; right: 40px;
+    border: 1.5px dashed var(--turmeric);
+    padding: 14px 18px;
+    font-family: var(--mono); font-size: 15px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--turmeric); font-weight: 600;
+    background: rgba(212,145,40,0.05);
+    line-height: 1.4;
+  }
+
+  .landscape-foot {
+    display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 40px;
+  }
+  .landscape-synth { font-family: var(--sans); font-size: 32px; font-weight: 500; color: var(--ink); letter-spacing: -0.015em; line-height: 1.25; max-width: 1400px; }
+  .landscape-synth em { font-style: normal; color: var(--turmeric); font-weight: 700; }
+  .landscape-source { font-family: var(--mono); font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-2); text-align: right; line-height: 1.6; }
+
+  /* ========== SLIDE 5: Three bets ========== */
+  .wedge-slide { padding-top: 140px; display: grid; grid-template-rows: auto 1fr; gap: 48px; }
+  .wedge-head { font-size: 68px; font-weight: 600; color: var(--ink); max-width: 1400px; line-height: 1.05; letter-spacing: -0.02em; }
+  .wedge-head em { font-style: normal; color: var(--turmeric); }
+  .bets-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; align-items: stretch; }
+  .bet {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 52px 48px;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 36px;
+    align-content: start;
+  }
+  .bet .num {
+    font-family: var(--mono);
+    font-size: 24px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--turmeric); font-weight: 500;
+  }
+  .bet .icon {
+    width: 96px; height: 96px; border-radius: 50%;
+    background: var(--ink); color: var(--canvas);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .bet .icon svg { width: 52px; height: 52px; }
+  .bet h3 { font-size: 56px; color: var(--ink); line-height: 0.95; letter-spacing: -0.025em; font-weight: 600; margin: 0; align-self: end; }
+  .bet .tagline {
+    font-size: 26px; line-height: 1.3; color: var(--text-2);
+    font-weight: 400; margin: 0;
+    padding-top: 28px; border-top: 1px solid var(--border);
+  }
+
+  /* ========== SLIDE 6: Architecture (redesign) ========== */
+  .arch-slide { padding-top: 108px !important; padding-bottom: 108px !important; display: grid !important; grid-template-rows: auto 1fr auto !important; grid-template-columns: 1fr !important; gap: 24px !important; align-items: stretch !important; }
+  .arch-head-row { display: grid; grid-template-columns: 1.2fr 1fr; gap: 72px; align-items: end; }
+  .arch-head-h { font-size: 96px; font-weight: 600; color: var(--ink); line-height: 0.92; letter-spacing: -0.035em; margin: 0; }
+  .arch-head-h em { font-style: normal; color: var(--turmeric); }
+  .arch-head-sub { font-family: var(--serif); font-size: 40px; font-style: italic; line-height: 1.2; color: var(--text); letter-spacing: -0.015em; padding-bottom: 12px; max-width: 520px; }
+
+  .arch-diagram { display: grid; grid-template-columns: 1fr 72px; gap: 28px; align-items: stretch; position: relative; }
+  .arch-stack { display: flex; flex-direction: column; gap: 6px; }
+  .arch-layer { display: grid; grid-template-columns: 96px 1fr; gap: 0; align-items: stretch; min-height: 72px; }
+  .al-code { display: flex; align-items: center; justify-content: flex-start; font-family: var(--mono); font-size: 36px; font-weight: 500; color: var(--turmeric); letter-spacing: 0.02em; padding: 0 28px 0 0; border-right: 2px solid var(--ink); }
+  .al-band { display: grid; grid-template-columns: 220px 1fr auto; gap: 32px; align-items: center; padding: 16px 24px 16px 28px; background: var(--card); border: 1px solid var(--border); border-left: 8px solid var(--ink); border-radius: 8px; }
+  .al-kind { font-family: var(--mono); font-size: 22px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-2); font-weight: 600; }
+  .al-title { font-family: var(--sans); font-size: 36px; font-weight: 600; color: var(--ink); line-height: 1; letter-spacing: -0.015em; }
+  .al-tail { font-family: var(--mono); font-size: 22px; color: var(--text-2); line-height: 1.35; letter-spacing: 0.02em; text-align: right; }
+
+  /* Layer kind colors (left band) */
+  .al-surface .al-band { border-left-color: var(--ink); }
+  .al-surface .al-kind { color: var(--ink); opacity: 0.7; }
+  .al-brain .al-band { border-left-color: var(--turmeric); background: color-mix(in srgb, var(--turmeric) 7%, var(--card)); }
+  .al-brain .al-kind { color: color-mix(in srgb, var(--turmeric) 75%, var(--ink) 25%); }
+  .al-data .al-band { border-left-color: var(--leaf); background: color-mix(in srgb, var(--leaf) 5%, var(--card)); }
+  .al-data .al-kind { color: var(--leaf); }
+  .al-ground .al-band { border-left-color: var(--turmeric); background: var(--ink); color: var(--canvas); }
+  .al-ground .al-kind { color: var(--turmeric); opacity: 0.9; }
+  .al-ground .al-title { color: var(--canvas); }
+  .al-ground .al-tail { color: rgba(247,244,238,0.7); }
+
+  /* Flow trace */
+  .arch-flow { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 8px 0; }
+  .af-top, .af-bot { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .af-node { width: 18px; height: 18px; border-radius: 50%; background: var(--ink); border: 3px solid var(--canvas); box-shadow: 0 0 0 2px var(--ink); }
+  .af-node-acc { background: var(--turmeric); box-shadow: 0 0 0 2px var(--ink); }
+  .af-label { font-family: var(--mono); font-size: 22px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-2); writing-mode: vertical-rl; transform: rotate(180deg); font-weight: 600; }
+  .af-label-b { color: var(--turmeric); }
+  .af-line { flex: 1; width: 2px; background: repeating-linear-gradient(to bottom, var(--ink) 0 6px, transparent 6px 12px); margin: 12px 0; min-height: 120px; }
+
+  .arch-legend { display: none; }
+
+  .arch-ribbon { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 3px solid var(--ink); padding-top: 20px; }
+  .ar-cell { padding: 0 32px; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; }
+  .ar-cell:first-child { padding-left: 0; }
+  .ar-cell:last-child { border-right: none; padding-right: 0; }
+  .ar-n { font-family: var(--sans); font-size: 76px; font-weight: 600; color: var(--ink); line-height: 1; letter-spacing: -0.03em; }
+  .ar-l { font-family: var(--mono); font-size: 22px; color: var(--text-2); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+
+  /* ========== SLIDE 7: Why now ========== */
+  .whynow-slide { padding-top: 140px; display: grid; grid-template-rows: auto auto auto; gap: 44px; }
+  .whynow-head { font-size: 96px; font-weight: 600; color: var(--ink); line-height: 0.98; max-width: 1720px; letter-spacing: -0.035em; }
+  .whynow-head em { font-style: normal; color: var(--turmeric); }
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 3px solid var(--ink); align-content: start; }
+  .tl-item { padding: 32px 32px 0 0; border-right: 1px solid var(--border); position: relative; }
+  .tl-item:last-child { border-right: none; padding-right: 0; }
+  .tl-item::before {
+    content: ""; position: absolute; top: -13px; left: 0;
+    width: 22px; height: 22px; background: var(--turmeric); border-radius: 50%;
+  }
+  .tl-year { font-family: var(--mono); font-size: 56px; color: var(--turmeric); letter-spacing: -0.01em; font-weight: 500; line-height: 1; margin-bottom: 18px; }
+  .tl-title { font-size: 32px; font-weight: 600; color: var(--ink); line-height: 1.1; margin-bottom: 14px; letter-spacing: -0.01em; white-space: nowrap; }
+  .tl-desc { font-size: 24px; line-height: 1.5; color: var(--text-2); }
+
+  /* ========== SLIDE 8: Business model ========== */
+  .gtm-slide { padding-top: 140px; display: grid; grid-template-rows: auto 1fr; gap: 48px; }
+  .gtm-hero { display: grid; grid-template-columns: 1.3fr 1fr; gap: 72px; align-items: center; }
+  .gtm-headline { font-size: 108px; line-height: 0.98; font-weight: 600; color: var(--ink); letter-spacing: -0.035em; }
+  .gtm-headline em { font-style: normal; color: var(--turmeric); }
+  .gtm-warn {
+    background: var(--card); border: 1px solid var(--border); border-left: 6px solid var(--alert);
+    border-radius: 8px; padding: 36px 40px;
+  }
+  .gtm-warn .lab { font-family: var(--mono); font-size: 24px; color: var(--alert); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 20px; font-weight: 500; }
+  .gtm-warn .fact { font-size: 38px; line-height: 1.15; color: var(--ink); font-weight: 600; letter-spacing: -0.015em; }
+  .gtm-warn .sub { font-size: 24px; line-height: 1.45; color: var(--text-2); margin-top: 14px; }
+
+  .phases-new { }
+  .phases-new h3 { font-family: var(--mono); font-size: 24px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-2); margin-bottom: 24px; }
+  .phase-track {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+    border-top: 2px solid var(--ink);
+    position: relative;
+  }
+  .phase-col {
+    padding: 28px 24px 0 0;
+    position: relative;
+    border-right: 1px solid var(--border);
+  }
+  .phase-col:last-child { border-right: none; }
+  .phase-col::before {
+    content: ""; position: absolute; top: -9px; left: 0;
+    width: 16px; height: 16px; background: var(--turmeric); border-radius: 50%;
+  }
+  .phase-col.phase-po::before { background: var(--leaf); width: 20px; height: 20px; top: -11px; }
+  .phase-num { font-family: var(--mono); font-size: 26px; color: var(--ink); font-weight: 600; letter-spacing: 0.06em; }
+  .phase-months { font-family: var(--mono); font-size: 24px; color: var(--text-2); margin-top: 4px; margin-bottom: 16px; }
+  .phase-amount { font-family: var(--sans); font-size: 44px; font-weight: 600; color: var(--leaf); line-height: 1; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .phase-amount.none { color: var(--text-2); font-size: 32px; }
+  .phase-amount.scale { color: var(--turmeric); }
+  .phase-label { font-size: 24px; line-height: 1.35; color: var(--text); font-weight: 500; margin-bottom: 8px; }
+  .phase-source { font-family: var(--mono); font-size: 24px; color: var(--text-2); line-height: 1.4; padding-right: 12px; }
+  .gtm-left h2 { font-size: 48px; font-weight: 600; color: var(--ink); line-height: 1.1; margin-bottom: 24px; }
+  .anti-pattern {
+    background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--turmeric);
+    border-radius: 8px; padding: 32px; margin-bottom: 32px;
+  }
+  .anti-pattern .lab { font-family: var(--mono); font-size: 24px; color: var(--turmeric); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+  .anti-pattern h4 { font-size: 28px; margin-bottom: 14px; color: var(--ink); }
+  .anti-pattern p { font-size: 24px; line-height: 1.5; color: var(--text); margin: 0; }
+  .our-model { font-size: 24px; line-height: 1.55; color: var(--text); }
+  .our-model .chans { margin: 16px 0 0 0; padding: 0; list-style: none; }
+  .our-model .chans li {
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+    font-size: 24px; color: var(--text);
+  }
+  .our-model .chans li:last-child { border-bottom: none; }
+  .phases h3 { font-size: 36px; color: var(--ink); margin-bottom: 24px; }
+  .phase-row {
+    display: grid; grid-template-columns: 110px 160px 1.2fr 1fr;
+    gap: 20px; padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+  }
+  .phase-row:first-of-type { border-top: 2px solid var(--ink); }
+  .phase-tag { font-family: var(--mono); font-weight: 500; font-size: 24px; color: var(--ink); letter-spacing: 0.06em; }
+  .phase-mo { font-family: var(--mono); font-size: 24px; color: var(--text-2); }
+  .phase-what { font-size: 24px; line-height: 1.4; color: var(--text); }
+  .phase-money { font-size: 24px; font-weight: 600; color: var(--leaf); font-family: var(--mono); }
+
+  /* ========== SLIDE 9: Team ========== */
+  .team-slide { padding-top: 120px; display: grid; grid-template-rows: auto auto 1fr; gap: 40px; }
+  .team-head { font-size: 72px; font-weight: 600; color: var(--ink); line-height: 1; letter-spacing: -0.025em; }
+  .team-head em { font-style: normal; color: var(--turmeric); }
+  .founders { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .founder { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+  .founder-photo {
+    width: 150px; height: 150px; border-radius: 50%;
+    background: repeating-linear-gradient(135deg, #EDE7D8 0 10px, #E4DDCB 10px 20px);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 24px; color: var(--text-2); letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  /* [TBD: founder headshots] */
+  .founder-name { font-size: 36px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; line-height: 1.05; }
+  .founder-role { font-family: var(--mono); font-size: 24px; color: var(--turmeric); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; font-weight: 500; }
+  .team-bottom { display: grid; grid-template-columns: 1fr 1.15fr; gap: 64px; align-items: start; padding-top: 28px; border-top: 2px solid var(--ink); }
+  .right-place {
+    font-size: 22px; line-height: 1.45; color: var(--text);
+  }
+  .right-place b { color: var(--ink); }
+  .kgp-kicker { font-family: var(--mono); font-size: 20px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--turmeric); margin-bottom: 10px; font-weight: 500; }
+  .kgp-lede { font-size: 26px; line-height: 1.3; color: var(--ink); font-weight: 600; letter-spacing: -0.01em; margin-bottom: 18px; }
+  .kgp-lede em { font-style: normal; color: var(--turmeric); }
+  .kgp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; margin-bottom: 14px; }
+  .kgp-stat { display: flex; flex-direction: column; gap: 2px; padding: 10px 0; border-top: 1px solid var(--border); }
+  .kgp-stat .n { font-family: var(--mono); font-size: 30px; font-weight: 600; color: var(--ink); line-height: 1; letter-spacing: -0.01em; }
+  .kgp-stat .l { font-size: 15px; line-height: 1.3; color: var(--text-2); }
+  .kgp-foot { font-size: 18px; line-height: 1.45; color: var(--text-2); padding-top: 12px; border-top: 1px solid var(--border); }
+  .kgp-foot b { color: var(--ink); }
+  .ask-block { }
+  .ask-sub { font-family: var(--mono); font-size: 24px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--turmeric); margin-bottom: 16px; font-weight: 500; }
+  .ask-block h3 { font-size: 40px; color: var(--ink); margin-bottom: 24px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.05; }
+  .asks { display: flex; flex-direction: column; gap: 16px; }
+  .ask {
+    display: grid; grid-template-columns: 56px 1fr; gap: 20px; align-items: center;
+  }
+  .ask .num {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--ink); color: var(--canvas);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 26px; font-weight: 600;
+  }
+  .ask .body h4 { font-size: 26px; color: var(--ink); margin-bottom: 4px; line-height: 1.15; font-weight: 600; }
+  .ask .body p { font-size: 24px; color: var(--text-2); line-height: 1.4; margin: 0; }
+
+  /* ========== Appendix slides ========== */
+  .apx { padding-top: 160px; }
+  .apx h2 { font-size: 48px; font-weight: 600; color: var(--ink); margin-bottom: 16px; line-height: 1.15; max-width: 1500px; }
+  .apx .apx-sub { font-size: 28px; color: var(--text-2); font-style: italic; margin-bottom: 48px; max-width: 1500px; line-height: 1.4; }
+  .apx .callout {
+    margin-top: 40px; padding: 28px 36px;
+    background: var(--ink); color: var(--canvas); border-radius: 8px;
+    font-size: 26px; line-height: 1.5; max-width: 1500px;
+  }
+  .apx .callout em { color: var(--turmeric); font-style: normal; }
+
+  /* Two-col appendix */
+  .apx-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  .apx-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 36px;
+  }
+  .apx-card h4 { font-size: 30px; color: var(--ink); margin-bottom: 14px; }
+  .apx-card p { font-size: 24px; line-height: 1.55; color: var(--text); margin: 0 0 12px; }
+  .apx-card ul { margin: 0; padding-left: 20px; font-size: 24px; line-height: 1.6; color: var(--text); }
+
+  /* Table styling */
+  table.apx-table { width: 100%; border-collapse: collapse; font-size: 24px; }
+  table.apx-table th, table.apx-table td { text-align: left; padding: 16px 18px; border-bottom: 1px solid var(--border); }
+  table.apx-table thead th { font-family: var(--mono); font-size: 20px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-2); border-bottom: 2px solid var(--ink); }
+  table.apx-table tr.jovara-row { background: var(--ink); color: var(--canvas); }
+  table.apx-table tr.jovara-row td { color: var(--canvas); font-weight: 500; }
+  table.apx-table tr.jovara-row td strong { color: var(--turmeric); }
+
+  /* Safety 5 layers */
+  .safety-layers { display: flex; flex-direction: column; gap: 14px; }
+  .safety-layer {
+    display: grid; grid-template-columns: 64px 1fr; gap: 24px; align-items: start;
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 22px 26px;
+  }
+  .safety-layer .n {
+    width: 52px; height: 52px; border-radius: 50%; background: var(--leaf); color: var(--canvas);
+    display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 26px; font-weight: 600;
+  }
+  .safety-layer h4 { font-size: 26px; color: var(--ink); margin-bottom: 6px; }
+  .safety-layer p { font-size: 24px; color: var(--text-2); margin: 0; line-height: 1.5; }
+
+  /* Plantix alert */
+  .alert-card {
+    background: var(--card); border: 1px solid var(--alert);
+    border-left: 6px solid var(--alert);
+    border-radius: 8px; padding: 32px; margin-bottom: 32px;
+  }
+  .alert-card .lab { font-family: var(--mono); font-size: 22px; color: var(--alert); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; }
+  .alert-card h4 { font-size: 32px; color: var(--ink); margin-bottom: 16px; }
+  .alert-card p { font-size: 24px; line-height: 1.55; color: var(--text); margin: 0 0 10px; }
+
+  /* Cost matrix */
+  .cost-matrix { display: grid; grid-template-columns: 1.4fr 1fr 1.2fr; gap: 0; border-top: 2px solid var(--ink); }
+  .cost-matrix .h, .cost-matrix .c {
+    padding: 20px 22px; border-bottom: 1px solid var(--border); font-size: 24px;
+  }
+  .cost-matrix .h { font-family: var(--mono); font-size: 20px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-2); }
+  .cost-matrix .c.price { font-family: var(--mono); color: var(--ink); font-weight: 500; }
+  .cost-matrix .default { background: var(--card); font-weight: 600; color: var(--ink); }
+
+  /* Demo */
+  .demo-steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; margin-top: 32px; }
+  .demo-step {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 32px;
+    display: flex; flex-direction: column; gap: 18px; min-height: 480px;
+  }
+  .demo-step.refuse { border-color: var(--turmeric); border-width: 2px; }
+  .demo-step .step-lab { font-family: var(--mono); font-size: 20px; color: var(--text-2); letter-spacing: 0.1em; text-transform: uppercase; }
+  .demo-step h4 { font-size: 26px; color: var(--ink); }
+  .demo-bubble {
+    background: var(--canvas); border-radius: 12px; padding: 20px;
+    font-family: var(--bn); font-size: 26px; line-height: 1.4; color: var(--ink);
+  }
+  .demo-bubble.en { font-family: var(--sans); font-size: 22px; color: var(--text); line-height: 1.55; }
+  .demo-bubble.refusal { background: #FDF6E6; border: 1px solid var(--turmeric); }
+  .demo-src { font-family: var(--mono); font-size: 20px; color: var(--text-2); letter-spacing: 0.05em; margin-top: 6px; }
+
+  /* Sources */
+  .sources { columns: 2; column-gap: 56px; font-size: 22px; line-height: 1.6; }
+  .sources .src-item { break-inside: avoid; padding: 10px 0; border-bottom: 1px solid var(--border); color: var(--text); }
+  .sources .src-item b { color: var(--ink); font-weight: 600; }
+  .sources-foot { margin-top: 36px; font-family: var(--mono); font-size: 22px; color: var(--text-2); font-style: italic; }
+
+  /* Progress chrome */
+  .deck-chrome {
+    position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+    z-index: 1000;
+    display: flex; align-items: center; gap: 6px;
+    padding: 10px 16px;
+    background: rgba(11,34,57,0.9);
+    border-radius: 9999px;
+    backdrop-filter: blur(8px);
+    font-family: var(--mono);
+  }
+  .deck-chrome .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: rgba(247,244,238,0.3);
+    cursor: pointer; border: none; padding: 0;
+    transition: background 150ms;
+  }
+  .deck-chrome .dot:hover { background: rgba(247,244,238,0.6); }
+  .deck-chrome .dot.active { background: var(--turmeric); }
+  .deck-chrome .dot.apx { width: 7px; height: 7px; background: rgba(247,244,238,0.2); }
+  .deck-chrome .dot.apx.active { background: var(--turmeric); width: 10px; height: 10px; }
+  .deck-chrome .sep {
+    width: 1px; height: 16px; background: rgba(247,244,238,0.3); margin: 0 8px;
+  }
+  .deck-chrome .counter {
+    color: rgba(247,244,238,0.9); font-size: 13px; letter-spacing: 0.08em;
+    margin-left: 12px; padding-left: 12px; border-left: 1px solid rgba(247,244,238,0.3);
+  }
+
+  /* Speaker notes overlay */
+  .notes-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(11,34,57,0.96);
+    color: var(--canvas);
+    display: none;
+    padding: 60px 100px;
+    overflow-y: auto;
+    font-family: var(--sans);
+  }
+  .notes-overlay.active { display: flex; flex-direction: column; }
+  .notes-overlay h3 { font-size: 24px; color: var(--turmeric); margin-bottom: 20px; font-family: var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
+  .notes-overlay .note-body { font-size: 28px; line-height: 1.6; max-width: 1200px; color: var(--canvas); }
+  .notes-overlay .close-hint { margin-top: auto; font-family: var(--mono); font-size: 14px; color: rgba(247,244,238,0.5); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* Help overlay */
+  .help-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(11,34,57,0.96);
+    color: var(--canvas);
+    display: none;
+    align-items: center; justify-content: center;
+  }
+  .help-overlay.active { display: flex; }
+  .help-panel {
+    background: var(--canvas); color: var(--text);
+    padding: 48px 56px; border-radius: 12px;
+    min-width: 560px;
+  }
+  .help-panel h3 { font-size: 28px; color: var(--ink); margin-bottom: 24px; }
+  .help-panel dl { display: grid; grid-template-columns: auto 1fr; gap: 12px 24px; font-size: 18px; }
+  .help-panel dt { font-family: var(--mono); color: var(--ink); font-weight: 600; background: var(--card); padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); }
+  .help-panel dd { margin: 0; color: var(--text-2); align-self: center; }
+
+  /* Overview overlay */
+  .overview-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(11,34,57,0.96);
+    display: none;
+    padding: 40px;
+    overflow-y: auto;
+  }
+  .overview-overlay.active { display: block; }
+  .overview-title {
+    color: var(--turmeric); font-family: var(--mono); font-size: 14px;
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 16px;
+  }
+  .overview-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 40px;
+  }
+  .ov-thumb {
+    background: var(--canvas); color: var(--text); border-radius: 6px;
+    padding: 12px; cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 150ms;
+    aspect-ratio: 16/9;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .ov-thumb:hover { border-color: var(--turmeric); }
+  .ov-thumb.current { border-color: var(--turmeric); }
+  .ov-num { font-family: var(--mono); font-size: 12px; color: var(--text-2); letter-spacing: 0.08em; }
+  .ov-title { font-size: 13px; line-height: 1.25; font-weight: 600; color: var(--ink); }
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+<!-- ============ MAIN DECK ============ -->
+
+<!-- Slide 1 — Title -->
+<section class="title-slide" data-label="01 Title">
+  <div class="title-badge">AMD Slingshot · Regional Demo Day 2026</div>
+  <div class="jovara-mark">Jovara<span class="dot">.</span></div>
+  <div class="title-tag">A voice-first AI agronomist for Indian farmers, <em>built on government rails.</em></div>
+  <div class="title-meta">
+    <div>
+      <div class="k">Founders</div>
+      <div class="v">Devansh Gupta<br/>Animesh Raj<br/>Prem Agarwal</div>
+    </div>
+    <div>
+      <div class="k">Institution</div>
+      <div class="v">IIT Kharagpur</div>
+    </div>
+    <div>
+      <div class="k">Date</div>
+      <div class="v">April 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 2 — The hook -->
+<section class="hook-slide" data-label="02 The collapse">
+  <div class="sec-label">The collapse</div>
+  <div class="slide-num">02 / 09</div>
+  <div class="hook-top">
+    <div>
+      <div class="eyebrow" style="margin-bottom:28px;">Kisan Call Centre · calls handled</div>
+      <div class="hook-stat">
+        <span>58</span><span class="arrow">→</span><span class="after">35</span>
+      </div>
+      <div class="hook-unit">lakh calls · 2020–21 → 2022–23</div>
+      <div class="hook-caption">Farmers stopped calling. <em>Nothing replaced it.</em></div>
+    </div>
+    <div class="hook-right">
+      <div class="eyebrow" style="margin-bottom:28px; color: var(--alert);">The headline · two years</div>
+      <div class="hook-kicker">−40%</div>
+      <h2>India's flagship<br/>farmer advisory<br/><em>is collapsing</em>.</h2>
+      <div class="hook-source">Lok Sabha reply · Ministry of Agriculture · 2023</div>
+    </div>
+  </div>
+  <div class="hook-bottom">
+    <div class="hook-bar-row">
+      <div class="hbr-lab">2020–21</div>
+      <div class="hbr-bar"><div class="hbr-fill" style="width:100%; background:var(--ink);"><span class="hbr-num">58 lakh</span></div></div>
+    </div>
+    <div class="hook-bar-row">
+      <div class="hbr-lab">2021–22</div>
+      <div class="hbr-bar"><div class="hbr-fill" style="width:78%; background:var(--ink); opacity:0.7;"><span class="hbr-num">45 lakh</span></div></div>
+    </div>
+    <div class="hook-bar-row">
+      <div class="hbr-lab">2022–23</div>
+      <div class="hbr-bar"><div class="hbr-fill hbr-after" style="width:60%;"><span class="hbr-num">35 lakh</span></div></div>
+    </div>
+  </div>
+  <div class="foot-brand">Jovara</div>
+  <div class="foot-right">AMD Slingshot · 2026</div>
+</section>
+
+<!-- Slide 3 — The problem (redesigned) -->
+<section class="problem-slide" data-label="03 The problem">
+  <div class="sec-label">The problem</div>
+  <div class="slide-num">03 / 09</div>
+  <div class="persona-frame">
+    <div class="persona-image"></div>
+    <div class="persona-caption">
+      <div class="persona-kicker">Persona · Murshidabad, WB</div>
+      <div class="persona-name-new">Ruma Das, 38</div>
+      <div class="persona-meta-new">Marginal paddy farmer · 0.4 hectares</div>
+      <div class="persona-quote-new">“I don’t type. If I have to type, I will just call my cousin.”</div>
+    </div>
+    <div class="foot-brand">Jovara</div>
+  </div>
+  <div class="persona-analysis">
+    <div class="pa-top">
+      <div class="pa-eyebrow">Farmers like Ruma, by the numbers</div>
+      <div class="pa-hero">
+        <div class="pa-num">86<em>m</em></div>
+        <div class="pa-headline">A coverage gap <em>no state can hire out of.</em></div>
+      </div>
+    </div>
+    <div class="pa-stats">
+      <div class="pa-stat">
+        <div class="pa-stat-num">1 : 1,162</div>
+        <div class="pa-stat-body">
+          <div class="pa-stat-unit">Extension officer ratio</div>
+          <div class="pa-stat-label">Recommended: 1 : 750</div>
+        </div>
+      </div>
+      <div class="pa-stat">
+        <div class="pa-stat-num">6.8%</div>
+        <div class="pa-stat-body">
+          <div class="pa-stat-unit">Farmers reached</div>
+          <div class="pa-stat-label">By formal extension · FAO 2012</div>
+        </div>
+      </div>
+      <div class="pa-stat">
+        <div class="pa-stat-num">₹13,661</div>
+        <div class="pa-stat-body">
+          <div class="pa-stat-unit">Monthly income</div>
+          <div class="pa-stat-label">Avg agri household · NAFIS 2021–22</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-right">AMD Slingshot · 2026</div>
+  </div>
+</section>
+
+<!-- Slide 4 — The landscape (simplified) -->
+<section class="landscape-slide" data-label="04 The landscape">
+  <div class="sec-label">The landscape</div>
+  <div class="slide-num">04 / 09</div>
+
+  <div class="landscape-head">
+    <h2 class="landscape-title">The top-right is <em>empty</em>.</h2>
+    <div class="landscape-kicker">Indian agri-advisory AI · 2026<strong>n = 7 shipping products</strong></div>
+  </div>
+
+  <div class="landscape-body">
+    <div class="matrix">
+      <div class="empty-badge">Category of one</div>
+      <div class="matrix-axes">
+        <div class="matrix-yarrow"></div>
+        <div class="matrix-xarrow"></div>
+        <div class="matrix-x0"></div>
+        <div class="matrix-y0"></div>
+
+        <div class="matrix-ylab top">Proactive</div>
+        <div class="matrix-ylab bot">Reactive</div>
+        <div class="matrix-xlab left">Narrow</div>
+        <div class="matrix-xlab right">Full-featured</div>
+
+        <!-- 7 competitors -->
+        <div class="dot"      style="left:18%; top:22%;"  data-name="MS AI Sowing"></div>
+        <div class="dot"      style="left:30%; top:34%;"  data-name="Wadhwani CottonAce"></div>
+        <div class="dot"      style="left:22%; top:66%;"  data-name="Plantix"></div>
+        <div class="dot left" style="left:72%; top:60%;"  data-name="Farmer.Chat"></div>
+        <div class="dot left" style="left:66%; top:72%;"  data-name="Kisan e-Mitra"></div>
+        <div class="dot left" style="left:74%; top:82%;"  data-name="Krishi Sathi"></div>
+        <div class="dot left" style="left:80%; top:90%;"  data-name="Bharat-VISTAAR"></div>
+
+        <!-- Jovara in empty quadrant -->
+        <div class="dot jovara left" style="left:76%; top:24%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="landscape-foot">
+    <div class="landscape-synth">Every full-featured product is <em>reactive</em>. Every proactive one is <em>narrow</em>.</div>
+    <div class="landscape-source">Jovara competitive audit<br/>Mar 2026</div>
+  </div>
+
+  <div class="foot-brand">Jovara</div>
+  <div class="foot-right">AMD Slingshot · 2026</div>
+</section>
+
+<!-- Slide 5 — Three bets -->
+<section class="wedge-slide" data-label="05 Our wedge">
+  <div class="sec-label">Our wedge</div>
+  <div class="slide-num">05 / 09</div>
+  <h2 class="wedge-head">Three bets. <em>One wedge.</em></h2>
+  <div class="bets-grid">
+    <div class="bet">
+      <div class="bet-top">
+        <div class="num">Bet 01</div>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>
+        </div>
+      </div>
+      <div class="bet-stat"><span class="bs-num">Push</span><span class="bs-strike">not pull</span></div>
+      <h3>Proactive by default.</h3>
+      <div class="tagline">The system speaks first. Weather, pest, price, scheme — before the farmer asks.</div>
+    </div>
+    <div class="bet">
+      <div class="bet-top">
+        <div class="num">Bet 02</div>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8.5 8 9 4.5-.5 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+      </div>
+      <div class="bet-stat"><span class="bs-num">4</span><span class="bs-unit">grounding<br/>layers</span></div>
+      <h3>Grounded in government.</h3>
+      <div class="tagline">Cannot recommend an unregistered pesticide. Full audit trail per message.</div>
+    </div>
+    <div class="bet">
+      <div class="bet-top">
+        <div class="num">Bet 03</div>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg>
+        </div>
+      </div>
+      <div class="bet-stat"><span class="bs-num">10+</span><span class="bs-unit">Indic<br/>languages</span></div>
+      <h3>Voice-first, not optional.</h3>
+      <div class="tagline">Sarvam-powered voice + IVR. Reaches the 40% no app will touch.</div>
+    </div>
+  </div>
+  <div class="foot-brand">Jovara</div>
+  <div class="foot-right">AMD Slingshot · 2026</div>
+</section>
+
+<!-- Slide 6 — Architecture -->
+<section class="arch-slide" data-label="06 Architecture">
+  <div class="sec-label">Architecture</div>
+  <div class="slide-num">06 / 09</div>
+  <div class="arch-head-row">
+    <h2 class="arch-head-h">Ground truth to <em>farmer's ear.</em></h2>
+    <div class="arch-head-sub">Six layers. One signal path. Audit trail end to end.</div>
+  </div>
+  <div class="arch-diagram">
+    <div class="arch-stack">
+      <div class="arch-layer al-surface">
+        <div class="al-code">L6</div>
+        <div class="al-band">
+          <div class="al-kind">Delivery</div>
+          <div class="al-title">Farmer surface</div>
+          <div class="al-tail">App · IVR 155-series · SMS</div>
+        </div>
+      </div>
+      <div class="arch-layer al-surface">
+        <div class="al-code">L5</div>
+        <div class="al-band">
+          <div class="al-kind">Delivery</div>
+          <div class="al-title">Orchestration</div>
+          <div class="al-tail">Event engine · HITL queue</div>
+        </div>
+      </div>
+      <div class="arch-layer al-brain">
+        <div class="al-code">L4</div>
+        <div class="al-band">
+          <div class="al-kind">Intelligence</div>
+          <div class="al-title">Grounding</div>
+          <div class="al-tail">ICAR PoP · KVK · audit trail</div>
+        </div>
+      </div>
+      <div class="arch-layer al-brain">
+        <div class="al-code">L3</div>
+        <div class="al-band">
+          <div class="al-kind">Intelligence</div>
+          <div class="al-title">AI</div>
+          <div class="al-tail">LLM · Sarvam ASR/TTS · multimodal</div>
+        </div>
+      </div>
+      <div class="arch-layer al-data">
+        <div class="al-code">L2</div>
+        <div class="al-band">
+          <div class="al-kind">Data</div>
+          <div class="al-title">Public rails</div>
+          <div class="al-tail">AgriStack · Krishi-DSS · SHC · eNAM</div>
+        </div>
+      </div>
+      <div class="arch-layer al-ground">
+        <div class="al-code">L1</div>
+        <div class="al-band">
+          <div class="al-kind">Ground truth</div>
+          <div class="al-title">Spike sensor</div>
+          <div class="al-tail">Sub-₹1,000 · moisture · EC · temp · LoRa</div>
+        </div>
+      </div>
+    </div>
+    <div class="arch-flow">
+      <div class="af-top">
+        <div class="af-node"></div>
+        <div class="af-label">Farmer</div>
+      </div>
+      <div class="af-line"></div>
+      <div class="af-bot">
+        <div class="af-label af-label-b">Field</div>
+        <div class="af-node af-node-acc"></div>
+      </div>
+    </div>
+    <div class="arch-legend">
+      <div class="al-leg"><span class="al-swatch al-sw-surface"></span>Delivery</div>
+      <div class="al-leg"><span class="al-swatch al-sw-brain"></span>Intelligence</div>
+      <div class="al-leg"><span class="al-swatch al-sw-data"></span>Data</div>
+      <div class="al-leg"><span class="al-swatch al-sw-ground"></span>Ground truth</div>
+    </div>
+  </div>
+  <div class="arch-ribbon">
+    <div class="ar-cell">
+      <div class="ar-n">4</div>
+      <div class="ar-l">Safety grounding layers</div>
+    </div>
+    <div class="ar-cell">
+      <div class="ar-n">10+</div>
+      <div class="ar-l">Indic languages · Sarvam</div>
+    </div>
+    <div class="ar-cell">
+      <div class="ar-n">&lt;0.5 ha</div>
+      <div class="ar-l">Resolution per Spike</div>
+    </div>
+  </div>
+  <div class="foot-brand">Jovara</div>
+  <div class="foot-right">AMD Slingshot · 2026</div>
+</section>
+
+<!-- Slide 7 — Why now -->
+<section class="whynow-slide" data-label="07 Why now">
+  <div class="sec-label">Why now</div>
+  <div class="slide-num">07 / 09</div>
+  <h2 class="whynow-head">2024 was <em>the last year</em><br/>this wasn't possible.</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">2024</div>
+      <div class="tl-title">AgriStack live.</div>
+      <div class="tl-stat">9.2 cr</div>
+      <div class="tl-desc">Farmer IDs. The distribution rail.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2024</div>
+      <div class="tl-title">Sarvam live.</div>
+      <div class="tl-stat">10+</div>
+      <div class="tl-desc">Indic languages. Frontier voice AI.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2023</div>
+      <div class="tl-title">Saagu Baagu proof.</div>
+      <div class="tl-stat">+21%</div>
+      <div class="tl-desc">Telangana trial. Playbook proven.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2025</div>
+      <div class="tl-title">KCC revamp opened.</div>
+      <div class="tl-stat">Open</div>
+      <div class="tl-desc">Budget lit. Policy alignment public.</div>
+    </div>
+  </div>
+  <div class="whynow-converge">
+    <div class="rails-grid">
+      <div class="rail-col"><div class="rail-k">Rail 01</div><div class="rail-v">Distribution</div></div>
+      <div class="rail-col"><div class="rail-k">Rail 02</div><div class="rail-v">Voice</div></div>
+      <div class="rail-col"><div class="rail-k">Rail 03</div><div class="rail-v">Proof</div></div>
+      <div class="rail-col"><div class="rail-k">Rail 04</div><div class="rail-v">Policy</div></div>
+    </div>
+    <div class="conv-payoff">
+      <div class="conv-label">Four rails.<br/>One window.</div>
+      <div class="conv-headline">All four arrived inside 24 months. <em>This is the quarter.</em></div>
+    </div>
+  </div>
+  <div class="foot-brand">Jovara</div>
+  <div class="foot-right">AMD Slingshot · 2026</div>
+</section>
+
+<!-- Slide 8 — Business model & GTM -->
+<section class="gtm-slide" data-label="08 Go to market">
+  <div class="sec-label">Go to market</div>
+  <div class="slide-num">08 / 09</div>
+  <div class="gtm-body">
+    <div class="gtm-left">
+      <h2 class="gtm-big">Sell to the<br/><em>state</em>.</h2>
+      <div class="gtm-versus">
+        <div class="gv-row gv-no">
+          <div class="gv-who">BharatAgri</div>
+          <div class="gv-arc"><span class="gv-in">$15M raised</span><span class="gv-arr">→</span><span class="gv-out">₹10.8 cr booked</span></div>
+        </div>
+        <div class="gv-div"></div>
+        <div class="gv-row gv-yes">
+          <div class="gv-who">MahaAgri-AI</div>
+          <div class="gv-arc"><span class="gv-in">1 contract</span><span class="gv-arr">→</span><span class="gv-out gv-out-big">₹500 cr</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="gtm-right">
+      <div class="stair-head">
+        <div class="stair-k">30-month ladder</div>
+        <div class="stair-v">Grant → seed → contract</div>
+      </div>
+      <div class="staircase">
+        <div class="stair-row" style="--w:28%">
+          <div class="sr-meta">
+            <div class="sr-meta-l"><em>M 3–15</em>Phase 1</div>
+            <div class="sr-meta-r">Non-dilutive grants</div>
+          </div>
+          <div class="sr-bar">
+            <span class="sr-phase">P1</span>
+            <span class="sr-amt">₹1.45 cr</span>
+          </div>
+        </div>
+        <div class="stair-row" style="--w:50%">
+          <div class="sr-meta">
+            <div class="sr-meta-l"><em>M 15–24</em>Phase 2</div>
+            <div class="sr-meta-r">B2G-literate seed</div>
+          </div>
+          <div class="sr-bar">
+            <span class="sr-phase">P2</span>
+            <span class="sr-amt">₹4–6 cr</span>
+          </div>
+        </div>
+        <div class="stair-row sr-po" style="--w:75%">
+          <div class="sr-meta">
+            <div class="sr-meta-l"><em>M 24–36</em>Phase 3</div>
+            <div class="sr-meta-r">First state contract</div>
+          </div>
+          <div class="sr-bar">
+            <span class="sr-phase">P3</span>
+            <span class="sr-amt">₹3–20 cr</span>
+          </div>
+        </div>
+        <div class="stair-row sr-scale" style="--w:100%">
+          <div class="sr-meta">
+            <div class="sr-meta-l"><em>M 36+</em>Phase 4</div>
+            <div class="sr-meta-r">Multi-state · Spike at scale</div>
+          </div>
+          <div class="sr-bar">
+            <span class="sr-phase">P4</span>
+            <span class="sr-amt">Scale</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="gtm-math">
+    <div class="gm-cell">
+      <div class="gm-k">Budget already lit</div>
+      <div class="gm-v">₹28,500 cr</div>
+      <div class="gm-s">FY26 · agri-extension budget</div>
+    </div>
+    <div class="gm-op">×</div>
+    <div class="gm-cell">
+      <div class="gm-k">Share we need</div>
+      <div class="gm-v">0.07%</div>
+      <div class="gm-s">One state line item, 36 months</div>
+    </div>
+    <div class="gm-op">=</div>
+    <div class="gm-cell gm-cell-out">
+      <div class="gm-k">Path to ₹20 cr ARR</div>
+      <div class="gm-v">₹20 cr</div>
+      <div class="gm-s">Without a single farmer paying</div>
+    </div>
+  </div>
+  <div class="foot-brand">Jovara</div>
+  <div class="foot-right">AMD Slingshot · 2026</div>
+</section>
+
+<!-- Slide 9 — Team + ask -->
+<section class="team-slide" data-label="09 Team & ask">
+  <div class="sec-label">The team</div>
+  <div class="slide-num">09 / 09</div>
+  <h2 class="team-head">Right place. Right time. <em>Right people.</em></h2>
+  <div class="founders">
+    <div class="founder">
+      <div class="founder-photo">Photo</div>
+      <!-- [TBD: Devansh headshot] -->
+      <div>
+        <div class="founder-name">Devansh Gupta</div>
+        <div class="founder-role">Tech · IIT KGP</div>
+      </div>
+    </div>
+    <div class="founder">
+      <div class="founder-photo">Photo</div>
+      <!-- [TBD: Animesh headshot] -->
+      <div>
+        <div class="founder-name">Animesh Raj</div>
+        <div class="founder-role">Tech · IIT KGP</div>
+      </div>
+    </div>
+    <div class="founder">
+      <div class="founder-photo">Photo</div>
+      <!-- [TBD: Prem headshot] -->
+      <div>
+        <div class="founder-name">Prem Agarwal</div>
+        <div class="founder-role">Finance &amp; Ops · IIT KGP</div>
+      </div>
+    </div>
+  </div>
+  <div class="team-bottom">
+    <div class="right-place">
+      <div class="kgp-kicker">IIT Kharagpur · the agritech advantage</div>
+      <div class="kgp-lede">India's <em>oldest and deepest</em> agricultural-engineering institute. Three hours from our pilot farmers.</div>
+      <div class="kgp-grid">
+        <div class="kgp-stat">
+          <div class="n">1952</div>
+          <div class="l">India's first Agricultural &amp; Food Engineering department, founded at KGP</div>
+        </div>
+        <div class="kgp-stat">
+          <div class="n">2,100 ac</div>
+          <div class="l">Campus — largest of any IIT, with working research farms on-site</div>
+        </div>
+        <div class="kgp-stat">
+          <div class="n">AI4ICPS</div>
+          <div class="l">DST-funded AI &amp; Cyber-Physical Systems hub, hosted on campus</div>
+        </div>
+        <div class="kgp-stat">
+          <div class="n">ICAR link</div>
+          <div class="l">Faculty ties to the national KVK farmer-extension network</div>
+        </div>
+      </div>
+      <div class="kgp-foot"><b>Why it matters for us.</b> Domain faculty three buildings away. Field trials on campus farms. An alumni network already inside state agriculture departments. The agritech institutional stack we need is already here.</div>
+    </div>
+    <div class="ask-block">
+    <div class="ask-sub">The ask · three specific things</div>
+    <h3>What we need from AMD.</h3>
+    <div class="asks">
+      <div class="ask">
+        <div class="num">1</div>
+        <div class="body">
+          <h4>Compute access</h4>
+          <p>For LLM training and Sarvam-integrated inference at scale.</p>
+        </div>
+      </div>
+      <div class="ask">
+        <div class="num">2</div>
+        <div class="body">
+          <h4>Mentorship</h4>
+          <p>From AMD's India AI team on edge-deployment for the Spike sensor fleet.</p>
+        </div>
+      </div>
+      <div class="ask">
+        <div class="num">3</div>
+        <div class="body">
+          <h4>A warm introduction</h4>
+          <p>To one AMD customer currently deployed with Indian state governments.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="foot-brand">Jovara</div>
+  <div class="foot-right">AMD Slingshot · 2026</div>
+</section>
+
+<!-- ============ APPENDIX ============ -->
+
+<!-- A1 — Kharif 2025 -->
+<section class="apx" data-label="A1 Kharif 2025">
+  <div class="sec-label">Appendix — Kharif 2025</div>
+  <div class="slide-num">A1 / 12</div>
+  <h2>3.88 crore farmers. 13 states. SMS-triggered proactive advisory.</h2>
+  <div class="apx-sub">Who built it?</div>
+  <div class="apx-2">
+    <div class="apx-card">
+      <h4>What it is</h4>
+      <p>Kharif 2025 central-government proactive SMS pilot. Reached <b>3.88 cr farmers across 13 states</b>, with <b>31–52% adjusting sowing</b> based on the advisory.</p>
+      <p>The largest proactive agri-advisory deployment in Indian history.</p>
+      <p><b>Plausible consortium:</b> IMD + Wadhwani + Sarvam + NIC.</p>
+    </div>
+    <div class="apx-card">
+      <h4>Our posture</h4>
+      <p>Highest-priority competitive-intelligence task in the next 30 days.</p>
+      <ul>
+        <li><b>If institutionalising</b> → narrow our wedge to multi-layer grounding + sensing-backed story.</li>
+        <li><b>If one-off</b> → category remains fully open.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout"><em>Open question:</em> is it becoming a permanent central layer, or was it a one-off? We're finding out.</div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A2 — BharatGen partnership -->
+<section class="apx" data-label="A2 BharatGen">
+  <div class="sec-label">Appendix — BharatGen posture</div>
+  <div class="slide-num">A2 / 12</div>
+  <h2>Partnership, not competition.</h2>
+  <div class="apx-sub">BharatGen is the foundation. Jovara builds on top.</div>
+  <div class="apx-2">
+    <div class="apx-card">
+      <h4>What BharatGen is</h4>
+      <p>IIT-B + AI4Bharat. Building the Indic LLM foundation. Krishi Sathi is their agri chatbot — reactive, RAG-based on ICAR + Vikaspedia.</p>
+      <p>IIT-B credibility. Central-government positioning. Competing would be expensive and unlikely to win.</p>
+    </div>
+    <div class="apx-card">
+      <h4>Our posture</h4>
+      <p><b>Consume their Indic LLM as foundational infrastructure.</b> Differentiate at the proactive orchestration, sensing, and grounding layers above it.</p>
+      <p style="font-family:var(--mono); font-size:24px; color:var(--text-2); margin-top:16px;">Same way startups build on CUDA, not around it.</p>
+    </div>
+  </div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A3 — Safety architecture -->
+<section class="apx" data-label="A3 Safety">
+  <div class="sec-label">Appendix — Safety architecture</div>
+  <div class="slide-num">A3 / 12</div>
+  <h2>Five layers that make proactive advisory safe to ship.</h2>
+  <div class="apx-sub">No Indian AI advisory composes all five. We're first.</div>
+  <div class="safety-layers">
+    <div class="safety-layer">
+      <div class="n">1</div>
+      <div><h4>Pesticide registry layer</h4><p>Every chemical traceable to government-registered database. Hard refusal on off-label. Cited alternative with dosage and pre-harvest interval.</p></div>
+    </div>
+    <div class="safety-layer">
+      <div class="n">2</div>
+      <div><h4>ICAR Package of Practices layer</h4><p>Agronomic baseline per crop × region from the canonical government knowledge base.</p></div>
+    </div>
+    <div class="safety-layer">
+      <div class="n">3</div>
+      <div><h4>Regional KVK overlay</h4><p>Local varieties, timing windows, state-recognised provenance from 731 KVKs.</p></div>
+    </div>
+    <div class="safety-layer">
+      <div class="n">4</div>
+      <div><h4>Human-in-the-loop review</h4><p>KVK agronomist reviews low-confidence cases before dispatch. Warm transfer to KCC on refusal.</p></div>
+    </div>
+    <div class="safety-layer">
+      <div class="n">5</div>
+      <div><h4>Audit trail</h4><p>Per farmer, per nudge, full source traceability.</p></div>
+    </div>
+  </div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A4 — Spike -->
+<section class="apx" data-label="A4 Spike">
+  <div class="sec-label">Appendix — Spike sensor</div>
+  <div class="slide-num">A4 / 12</div>
+  <h2>The sensor that closes the ground-truth gap.</h2>
+  <div class="apx-sub">Below satellite and weather-station resolution floors, at sub-₹1,000 BOM.</div>
+  <div class="apx-2">
+    <div class="apx-card">
+      <h4>Spec</h4>
+      <ul>
+        <li>Moisture + electrical conductivity + temperature</li>
+        <li>Sub-₹1,000 BOM</li>
+        <li>LoRa-class low-power radio</li>
+        <li>Solar micro-panel · no battery swap</li>
+        <li>One Spike per ~10–20 ha on anchor plots</li>
+        <li>Subsidy-eligible · AIF 3% subvention + CGTMSE + PM-KUSUM</li>
+      </ul>
+    </div>
+    <div class="apx-card">
+      <h4>Why it's defensible</h4>
+      <ul>
+        <li>Sub-0.5 ha resolution — below satellite (10–30 m) and IMD (~550 km²) floors</li>
+        <li>68% of Indian holdings are sub-0.5 ha</li>
+        <li>Fleet data → panchayat-resolution soil + micro-climate asset for the state</li>
+        <li>Phase 1: ~1,000 units with anchor farmers. Phase 2: state rate contract.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A5 — Unit economics -->
+<section class="apx" data-label="A5 Unit economics">
+  <div class="sec-label">Appendix — Unit economics</div>
+  <div class="slide-num">A5 / 12</div>
+  <h2>Who pays the ₹52 crore a year in outbound distribution?</h2>
+  <div class="apx-sub">1 crore farmers × 2 nudges/week × ₹0.50 average ≈ ₹52 cr/year</div>
+
+  <div class="cost-matrix">
+    <div class="h">Channel</div><div class="h">Per-unit cost</div><div class="h">Role</div>
+    <div class="c">Outbound voice IVR</div><div class="c price">₹0.15–0.40 / nudge</div><div class="c">Critical alerts only</div>
+    <div class="c">SMS</div><div class="c price">₹0.15–0.25 / message</div><div class="c">Trigger channel</div>
+    <div class="c">WhatsApp utility template</div><div class="c price">₹0.60–1.50 / conversation</div><div class="c">Smartphone tier</div>
+    <div class="c default">Inbound IVR pull · 155-series</div><div class="c price default">Contract-embedded</div><div class="c default">Default channel</div>
+  </div>
+
+  <div class="callout" style="margin-top:32px;">
+    <b style="color:var(--turmeric);">Committed architecture:</b> SMS-triggered pull IVR. Farmer dials in, doesn't receive outbound — collapses cost to SMS rate. Outbound voice reserved for critical events only. Cost sits inside per-farmer-per-year state contract, or on Sarvam/NIC rails. Both are live precedents.
+  </div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A6 — Funding cascade -->
+<section class="apx" data-label="A6 30-month plan">
+  <div class="sec-label">Appendix — Funding cascade</div>
+  <div class="slide-num">A6 / 12</div>
+  <h2>A 12-month runway optimised for B2B SaaS breaks at month 13.</h2>
+  <div class="apx-sub">We plan for 30.</div>
+
+  <table class="apx-table">
+    <thead>
+      <tr><th>Phase</th><th>Months</th><th>Funding</th><th>Size</th><th>Deliverable</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>0</b></td><td>0–3</td><td>IIT KGP STEP / FIE</td><td>—</td><td>DPIIT recognition · demo shipped</td></tr>
+      <tr><td><b>1</b></td><td>3–15</td><td>BIRAC BIG + RKVY-RAFTAAR + SISFS</td><td>~₹1.45 cr non-dilutive</td><td>10K-farmer WB pilot · published evidence</td></tr>
+      <tr><td><b>2</b></td><td>15–24</td><td>B2G-literate seed · Omnivore · Ankur · Social Alpha · AgriSURE</td><td>₹4–6 cr</td><td>WB design-partner MoU</td></tr>
+      <tr><td><b>3</b></td><td>24–36</td><td>First state rate contract</td><td>₹3–20 cr</td><td>Production deployment</td></tr>
+      <tr><td><b>4</b></td><td>36+</td><td>Multi-state + hardware capex · AIF + CGTMSE</td><td>—</td><td>Spike at scale</td></tr>
+    </tbody>
+  </table>
+  <div class="callout" style="margin-top:32px;">
+    18–24 months from first government meeting to first PO. 6–9 more months to payment realisation. That's the number that kills undercapitalised agri-tech.
+  </div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A7 — Why West Bengal -->
+<section class="apx" data-label="A7 West Bengal">
+  <div class="sec-label">Appendix — Why West Bengal</div>
+  <div class="slide-num">A7 / 12</div>
+  <h2>Network, not map.</h2>
+  <div class="apx-sub">Pilot-state choice is a founder-network decision. Ours happens to be coherent with the market thesis.</div>
+  <div class="apx-2">
+    <div class="apx-card">
+      <h4>The institutional anchor</h4>
+      <ul>
+        <li>IIT Kharagpur is in West Bengal</li>
+        <li>Agricultural &amp; Food Engineering dept · est. 1952</li>
+        <li>AI4ICPS hub on campus</li>
+        <li>Three hours from our primary persona's district</li>
+      </ul>
+    </div>
+    <div class="apx-card">
+      <h4>The grant geography</h4>
+      <ul>
+        <li>Krishak Bandhu + PM-KISAN are the scheme hooks</li>
+        <li>BMGF / JEEViKA footprint in adjacent Bihar</li>
+        <li>OLM in Odisha · credible orchestrator path</li>
+        <li>Highest density of grant infrastructure in eastern India</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A8 — Competitive table -->
+<section class="apx" data-label="A8 Competitive">
+  <div class="sec-label">Appendix — The full landscape</div>
+  <div class="slide-num">A8 / 12</div>
+  <h2>Who's doing what with government.</h2>
+  <div class="apx-sub">Of ten players, only three have deep government relationships. None ships full-featured proactive.</div>
+  <table class="apx-table">
+    <thead>
+      <tr><th>Company</th><th>Model</th><th>Funding</th><th>Reach</th><th>Govt depth</th><th>Proactive?</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>DeHaat</td><td>Full-stack D2F</td><td>~$222M</td><td>1.8M active</td><td>Partial</td><td>No</td></tr>
+      <tr><td>CropIn</td><td>SaaS / DPI</td><td>~$54M</td><td>7M via partners</td><td>Deep</td><td>No</td></tr>
+      <tr><td>Fasal</td><td>IoT horticulture</td><td>~$19M</td><td>150K acres</td><td>No</td><td>Partial</td></tr>
+      <tr><td>AgroStar</td><td>Input e-commerce</td><td>~$168M</td><td>9M claimed</td><td>No</td><td>No</td></tr>
+      <tr><td>BharatAgri</td><td>Paid subscription</td><td>~$15M</td><td>1.5M users</td><td>No</td><td>No</td></tr>
+      <tr><td>Stellapps</td><td>Dairy IoT + fintech</td><td>~$66M</td><td>3.5M dairy</td><td>State coops</td><td>No</td></tr>
+      <tr><td>Plantix</td><td>Image + retailer</td><td>~$7M</td><td>6M India</td><td>None (avoids)</td><td>No</td></tr>
+      <tr><td>Farmer.Chat</td><td>Multimodal chatbot</td><td>Grants</td><td>830K</td><td>Deep</td><td>No — reactive</td></tr>
+      <tr><td>Wadhwani AI</td><td>Image CNN + chatbot</td><td>Grants</td><td>18.5K (CottonAce)</td><td>Deep</td><td>Partial (1 pest)</td></tr>
+      <tr class="jovara-row"><td><strong>Jovara</strong></td><td><strong>Proactive voice + sensing, B2G</strong></td><td><strong>Seeking</strong></td><td><strong>—</strong></td><td><strong>Design-partner stage</strong></td><td><strong>Yes — full-featured</strong></td></tr>
+    </tbody>
+  </table>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A9 — Plantix anti-pattern -->
+<section class="apx" data-label="A9 Anti-pattern">
+  <div class="sec-label">Appendix — The anti-pattern</div>
+  <div class="slide-num">A9 / 12</div>
+  <h2>Advisory that makes money from pesticide commissions drifts.</h2>
+  <div class="apx-sub">State governments know this failure mode. It's why the B2G channel is open to a product that structurally cannot monetise through input commissions.</div>
+  <div class="alert-card">
+    <div class="lab">⚠ Cautionary case · Plantix</div>
+    <h4>Founded to reduce pesticide use. Acquired by a pesticide distributor.</h4>
+    <p>• 20M+ downloads. Free to farmer.</p>
+    <p>• Revenue: retailer commissions on pesticide / seed / fertiliser sales. ₹144 crore FY24.</p>
+    <p>• 2023 — acquired by Helm AG, a German agrochemical distributor.</p>
+    <p>• 2024 — FERN / WIRED investigation: only 20% of users reported higher yields. Advisory channels farmers <em>toward</em> pesticides.</p>
+  </div>
+  <div class="callout">
+    Our B2G-only model is a <em>structural defence</em>. We literally cannot be paid to recommend a specific product.
+  </div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A10 — Compliance -->
+<section class="apx" data-label="A10 Compliance">
+  <div class="sec-label">Appendix — Regulatory / DPDP</div>
+  <div class="slide-num">A10 / 12</div>
+  <h2>Day-1 compliance, not a year-2 retrofit.</h2>
+  <div class="apx-sub">For a B2G company, compliance is marketing. The state's Law Department is the gate we have to clear.</div>
+  <div class="apx-2">
+    <div class="apx-card">
+      <h4>The regulatory posture</h4>
+      <ul>
+        <li><b>DPDP Rules 2025</b> — notified November 2025</li>
+        <li><b>AgriStack Sandbox + UFSI APIs</b> — consent-manager-bound</li>
+        <li>Aadhaar in secure vault · never plain text</li>
+      </ul>
+    </div>
+    <div class="apx-card">
+      <h4>The product commitment</h4>
+      <ul>
+        <li>Three-tap data export + account deletion · no helpline</li>
+        <li>Zero third-party trackers · zero input-commerce hooks</li>
+        <li>Full audit log per farmer per nudge · RTI-ready</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A11 — Demo -->
+<section class="apx" data-label="A11 Demo">
+  <div class="sec-label">Appendix — The demo</div>
+  <div class="slide-num">A11 / 12</div>
+  <h2>What the product actually does.</h2>
+  <div class="apx-sub">Three frames. The refusal is the trust moment.</div>
+  <div class="demo-steps">
+    <div class="demo-step">
+      <div class="step-lab">Step 1 · The farmer asks</div>
+      <h4>Voice query in Bengali</h4>
+      <div class="demo-bubble">কীটপতঙ্গ কী স্প্রে করব?</div>
+      <div class="demo-bubble en">"What should I spray for this pest?"</div>
+    </div>
+    <div class="demo-step refuse">
+      <div class="step-lab" style="color:var(--turmeric);">Step 2 · The system refuses</div>
+      <h4>Grounding layers run · unregistered chemical rejected</h4>
+      <div class="demo-bubble refusal">"This spray isn't approved for paddy. The approved spray for this pest is [alternative] at 2 ml per litre."</div>
+      <div class="demo-src">Source · government pesticide register</div>
+    </div>
+    <div class="demo-step">
+      <div class="step-lab">Step 3 · Warm handoff</div>
+      <h4>Playback in voice language · KVK expert on tap</h4>
+      <div class="demo-bubble en" style="font-family:var(--mono); font-size:16px; line-height:1.6;">
+        ▸ Audio playback in Bengali<br/>
+        ▸ Warm-transfer to KVK expert<br/>
+        ▸ Full transcript logged to state audit trail
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:32px;">
+    <em>Commitment:</em> we'll be shipping this end-to-end by Demo Day.
+  </div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+<!-- A12 — Sources -->
+<section class="apx" data-label="A12 Sources">
+  <div class="sec-label">Appendix — Sources</div>
+  <div class="slide-num">A12 / 12</div>
+  <h2>The numbers, where they come from.</h2>
+  <div class="apx-sub">Every figure in this deck is traceable.</div>
+  <div class="sources">
+    <div class="src-item"><b>KCC call volumes</b> — Lok Sabha written reply (Ministry of Agriculture), 2023</div>
+    <div class="src-item"><b>Extension ratio</b> — ICRISAT / Gulati et al. 2018; FAO 2012 (6.8% coverage)</div>
+    <div class="src-item"><b>Farmer demographics</b> — Agriculture Census 2015-16; NSS 77th Round 2018-19; NAFIS 2021-22</div>
+    <div class="src-item"><b>Smartphone penetration</b> — QQRI 2022 pan-India</div>
+    <div class="src-item"><b>Crop loss estimates</b> — Dhaliwal et al. 2015; AICRP-WM; NABCONS 2022</div>
+    <div class="src-item"><b>Saagu Baagu results</b> — Digital Green + WEF C4IR, Telangana 2022-23</div>
+    <div class="src-item"><b>AgriStack progression</b> — PIB releases 2024-2026</div>
+    <div class="src-item"><b>Kisan e-Mitra scale</b> — PIB PRID 2244630, November 2025</div>
+    <div class="src-item"><b>Kharif 2025 AI pilot</b> — PIB 2025</div>
+    <div class="src-item"><b>PMFBY claims</b> — PMFBY dashboard, 30 June 2025</div>
+    <div class="src-item"><b>Competitive funding data</b> — Tracxn, Inc42, through April 2026</div>
+    <div class="src-item"><b>Peer-reviewed analysis</b> — Godara et al., <i>Engineering Applications of AI</i> 117:105555, 2023</div>
+  </div>
+  <div class="sources-foot">Full research memo available on request.</div>
+  <div class="foot-brand">Jovara · Appendix</div>
+</section>
+
+</deck-stage>
+
+<!-- Deck chrome -->
+<div class="deck-chrome" id="deck-chrome"></div>
+
+<!-- Speaker notes overlay -->
+<div class="notes-overlay" id="notes-overlay">
+  <h3 id="notes-slide-title">Speaker notes</h3>
+  <div class="note-body" id="notes-body"></div>
+  <div class="close-hint">Press N to close</div>
+</div>
+
+<!-- Help overlay -->
+<div class="help-overlay" id="help-overlay">
+  <div class="help-panel">
+    <h3>Keyboard shortcuts</h3>
+    <dl>
+      <dt>→ · Space · PgDn</dt><dd>Next slide</dd>
+      <dt>← · PgUp</dt><dd>Previous slide</dd>
+      <dt>Home / End</dt><dd>First / last main slide</dd>
+      <dt>A</dt><dd>Jump to appendix</dd>
+      <dt>M</dt><dd>Return to main deck</dd>
+      <dt>1–9 · 0</dt><dd>Jump to slide N (within main or appendix)</dd>
+      <dt>Esc</dt><dd>Overview · Esc again to close</dd>
+      <dt>F</dt><dd>Fullscreen toggle</dd>
+      <dt>N</dt><dd>Speaker notes overlay</dd>
+      <dt>?</dt><dd>This help</dd>
+    </dl>
+  </div>
+</div>
+
+<!-- Overview overlay -->
+<div class="overview-overlay" id="overview-overlay">
+  <div class="overview-title">Main deck</div>
+  <div class="overview-grid" id="ov-main"></div>
+  <div class="overview-title">Appendix</div>
+  <div class="overview-grid" id="ov-apx"></div>
+</div>
+
+<script src="deck-stage.js"></script>
+
+<script>
+(function(){
+  const stage = document.querySelector('deck-stage');
+  const MAIN_COUNT = 9;
+  const APX_COUNT = 12;
+  const TOTAL = MAIN_COUNT + APX_COUNT;
+
+  const notes = JSON.parse(document.getElementById('speaker-notes').textContent);
+
+  // Slide labels for overview + tooltip
+  const labels = Array.from(document.querySelectorAll('deck-stage > section')).map(s => s.getAttribute('data-label') || '');
+
+  let lastMainIdx = 0;
+
+  // ====== Chrome (progress dots) ======
+  const chrome = document.getElementById('deck-chrome');
+  for (let i = 0; i < MAIN_COUNT; i++) {
+    const b = document.createElement('button');
+    b.className = 'dot';
+    b.title = labels[i];
+    b.dataset.idx = i;
+    b.addEventListener('click', () => goTo(i));
+    chrome.appendChild(b);
+  }
+  const sep = document.createElement('div'); sep.className = 'sep'; chrome.appendChild(sep);
+  for (let i = 0; i < APX_COUNT; i++) {
+    const b = document.createElement('button');
+    b.className = 'dot apx';
+    b.title = labels[MAIN_COUNT + i];
+    b.dataset.idx = MAIN_COUNT + i;
+    b.addEventListener('click', () => goTo(MAIN_COUNT + i));
+    chrome.appendChild(b);
+  }
+  const counter = document.createElement('div');
+  counter.className = 'counter';
+  counter.id = 'counter';
+  chrome.appendChild(counter);
+
+  // ====== Overview ======
+  function buildOverview(){
+    const mainG = document.getElementById('ov-main');
+    const apxG = document.getElementById('ov-apx');
+    mainG.innerHTML = ''; apxG.innerHTML = '';
+    for (let i = 0; i < MAIN_COUNT; i++){
+      const t = document.createElement('div');
+      t.className = 'ov-thumb';
+      t.dataset.idx = i;
+      t.innerHTML = `<div class="ov-num">0${i+1}</div><div class="ov-title">${labels[i].replace(/^\d+\s*/,'')}</div>`;
+      t.addEventListener('click', () => { goTo(i); toggleOverview(false); });
+      mainG.appendChild(t);
+    }
+    for (let i = 0; i < APX_COUNT; i++){
+      const t = document.createElement('div');
+      t.className = 'ov-thumb';
+      t.dataset.idx = MAIN_COUNT + i;
+      t.innerHTML = `<div class="ov-num">A${i+1}</div><div class="ov-title">${labels[MAIN_COUNT + i].replace(/^A\d+\s*/,'')}</div>`;
+      t.addEventListener('click', () => { goTo(MAIN_COUNT + i); toggleOverview(false); });
+      apxG.appendChild(t);
+    }
+  }
+  buildOverview();
+
+  // ====== Nav primitives ======
+  function curIdx(){
+    // Try several interfaces the deck-stage component may expose
+    if (typeof stage.currentIndex === 'number') return stage.currentIndex;
+    if (typeof stage.index === 'number') return stage.index;
+    const hash = location.hash.replace('#','');
+    if (/^A?\d+$/i.test(hash)) {
+      if (hash[0].toUpperCase() === 'A') return MAIN_COUNT + parseInt(hash.slice(1),10) - 1;
+      return parseInt(hash,10) - 1;
+    }
+    return 0;
+  }
+  function goTo(idx){
+    idx = Math.max(0, Math.min(TOTAL - 1, idx));
+    if (typeof stage.goTo === 'function') stage.goTo(idx);
+    else if (typeof stage.setIndex === 'function') stage.setIndex(idx);
+    else { // fallback: update hash and dispatch
+      const h = idx < MAIN_COUNT ? String(idx + 1) : 'A' + (idx - MAIN_COUNT + 1);
+      location.hash = h;
+    }
+    setTimeout(updateChrome, 50);
+    setTimeout(updateChrome, 250);
+  }
+  function updateChrome(){
+    const i = curIdx();
+    document.querySelectorAll('#deck-chrome .dot').forEach(d => {
+      d.classList.toggle('active', parseInt(d.dataset.idx,10) === i);
+    });
+    document.querySelectorAll('.ov-thumb').forEach(t => {
+      t.classList.toggle('current', parseInt(t.dataset.idx,10) === i);
+    });
+    counter.textContent = i < MAIN_COUNT ? `${i+1} / ${MAIN_COUNT}` : `A${i - MAIN_COUNT + 1} / ${APX_COUNT}`;
+    if (i < MAIN_COUNT) lastMainIdx = i;
+
+    // Update hash
+    const h = i < MAIN_COUNT ? String(i + 1) : 'A' + (i - MAIN_COUNT + 1);
+    if (location.hash !== '#' + h) {
+      history.replaceState(null, '', '#' + h);
+    }
+
+    // If notes overlay open, refresh
+    if (notesOpen) refreshNotes();
+
+    // Speaker notes postMessage
+    try { window.postMessage({ slideIndexChanged: i }, '*'); } catch(e){}
+    try { window.parent && window.parent.postMessage({ slideIndexChanged: i }, '*'); } catch(e){}
+  }
+
+  // ====== Hash init ======
+  function parseHash(){
+    const h = location.hash.replace('#','').toUpperCase();
+    if (!h) return 0;
+    if (h.startsWith('A')){
+      const n = parseInt(h.slice(1),10);
+      if (!isNaN(n)) return MAIN_COUNT + Math.max(0, Math.min(APX_COUNT - 1, n - 1));
+    }
+    const n = parseInt(h, 10);
+    if (!isNaN(n)) return Math.max(0, Math.min(MAIN_COUNT - 1, n - 1));
+    return 0;
+  }
+  window.addEventListener('DOMContentLoaded', () => {
+    const startIdx = parseHash();
+    if (startIdx > 0) goTo(startIdx);
+    setTimeout(updateChrome, 100);
+  });
+  // If already ready
+  setTimeout(() => { const startIdx = parseHash(); if (startIdx > 0) goTo(startIdx); updateChrome(); }, 200);
+
+  // ====== Speaker notes overlay ======
+  let notesOpen = false;
+  const nov = document.getElementById('notes-overlay');
+  const nbody = document.getElementById('notes-body');
+  const ntitle = document.getElementById('notes-slide-title');
+  function refreshNotes(){
+    const i = curIdx();
+    ntitle.textContent = (i < MAIN_COUNT ? `Slide ${i+1}` : `Appendix A${i - MAIN_COUNT + 1}`) + ' · speaker notes';
+    nbody.textContent = notes[i] || '(no notes)';
+  }
+  function toggleNotes(open){
+    notesOpen = (typeof open === 'boolean') ? open : !notesOpen;
+    nov.classList.toggle('active', notesOpen);
+    if (notesOpen) refreshNotes();
+  }
+
+  // ====== Help ======
+  const hov = document.getElementById('help-overlay');
+  function toggleHelp(open){ hov.classList.toggle('active', typeof open === 'boolean' ? open : !hov.classList.contains('active')); }
+  hov.addEventListener('click', e => { if (e.target === hov) toggleHelp(false); });
+
+  // ====== Overview ======
+  const oov = document.getElementById('overview-overlay');
+  function toggleOverview(open){ oov.classList.toggle('active', typeof open === 'boolean' ? open : !oov.classList.contains('active')); }
+  oov.addEventListener('click', e => { if (e.target === oov) toggleOverview(false); });
+
+  // ====== Keyboard ======
+  window.addEventListener('keydown', (e) => {
+    const k = e.key;
+    // Always allow Escape to close overlays
+    if (k === 'Escape') {
+      if (notesOpen) return toggleNotes(false);
+      if (hov.classList.contains('active')) return toggleHelp(false);
+      toggleOverview(); e.preventDefault(); return;
+    }
+    if (notesOpen && k.toLowerCase() !== 'n') {
+      // let N toggle; everything else inside notes: ignore nav
+    }
+    if (k === 'n' || k === 'N') { toggleNotes(); e.preventDefault(); return; }
+    if (k === '?' || (e.shiftKey && k === '/')) { toggleHelp(); e.preventDefault(); return; }
+    if (k === 'f' || k === 'F') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+      else document.exitFullscreen?.();
+      e.preventDefault(); return;
+    }
+    if (k === 'a' || k === 'A') { goTo(MAIN_COUNT); e.preventDefault(); return; }
+    if (k === 'm' || k === 'M') { goTo(lastMainIdx); e.preventDefault(); return; }
+    if (k === 'Home') { goTo(0); e.preventDefault(); return; }
+    if (k === 'End') { goTo(MAIN_COUNT - 1); e.preventDefault(); return; }
+    if (/^[0-9]$/.test(k)) {
+      const i = curIdx();
+      const num = parseInt(k,10);
+      if (i < MAIN_COUNT){
+        if (num >= 1 && num <= MAIN_COUNT) { goTo(num - 1); e.preventDefault(); return; }
+      } else {
+        // In appendix: 1 = A1 ... 9 = A9 ; 0 = A10 ; others via arrow
+        if (num === 0) { goTo(MAIN_COUNT + 9); e.preventDefault(); return; }
+        if (num >= 1 && num <= 9) { goTo(MAIN_COUNT + num - 1); e.preventDefault(); return; }
+      }
+    }
+    // arrow/space/pgdn/pgup -- let deck-stage handle, but update chrome after
+    if (['ArrowRight','ArrowLeft','PageDown','PageUp',' ','Spacebar'].includes(k)) {
+      setTimeout(updateChrome, 80);
+      setTimeout(updateChrome, 300);
+    }
+  });
+
+  // Hash changes (from component)
+  window.addEventListener('hashchange', () => setTimeout(updateChrome, 50));
+
+  // Also watch the slideIndexChanged messages the component may post
+  window.addEventListener('message', (e) => {
+    if (e.data && typeof e.data.slideIndexChanged === 'number'){
+      setTimeout(updateChrome, 20);
+    }
+  });
+
+  // Periodic sync for safety
+  setInterval(updateChrome, 1000);
+})();
+</script>
+
+</body>
+</html>
