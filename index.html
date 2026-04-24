@@ -659,12 +659,17 @@
   .founders { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
   .founder { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
   .founder-photo {
-    width: 150px; height: 150px; border-radius: 50%;
+    width: 170px; height: 170px; border-radius: 50%;
     background: repeating-linear-gradient(135deg, #EDE7D8 0 10px, #E4DDCB 10px 20px);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--mono); font-size: 24px; color: var(--text-2); letter-spacing: 0.1em; text-transform: uppercase;
+    overflow: hidden;
+    flex-shrink: 0;
   }
-  /* [TBD: founder headshots] */
+  .founder-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+    display: block;
+  }
   .founder-name { font-size: 36px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; line-height: 1.05; }
   .founder-role { font-family: var(--mono); font-size: 24px; color: var(--turmeric); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; font-weight: 500; }
   .team-bottom { display: grid; grid-template-columns: 1fr 1.15fr; gap: 64px; align-items: start; padding-top: 28px; border-top: 2px solid var(--ink); }
@@ -1327,24 +1332,21 @@
   <h2 class="team-head">Right place. Right time. <em>Right people.</em></h2>
   <div class="founders">
     <div class="founder">
-      <div class="founder-photo">Photo</div>
-      <!-- [TBD: Devansh headshot] -->
+      <div class="founder-photo"><img src="assets/devansh.jpeg" alt="Devansh Gupta"></div>
       <div>
         <div class="founder-name">Devansh Gupta</div>
         <div class="founder-role">Tech · IIT KGP</div>
       </div>
     </div>
     <div class="founder">
-      <div class="founder-photo">Photo</div>
-      <!-- [TBD: Animesh headshot] -->
+      <div class="founder-photo"><img src="assets/animesh.jpeg" alt="Animesh Raj"></div>
       <div>
         <div class="founder-name">Animesh Raj</div>
         <div class="founder-role">Tech · IIT KGP</div>
       </div>
     </div>
     <div class="founder">
-      <div class="founder-photo">Photo</div>
-      <!-- [TBD: Prem headshot] -->
+      <div class="founder-photo"><img src="assets/prem.jpeg" alt="Prem Agarwal" style="object-position: center 8%;"></div>
       <div>
         <div class="founder-name">Prem Agarwal</div>
         <div class="founder-role">Finance &amp; Ops · IIT KGP</div>
